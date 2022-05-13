@@ -20,11 +20,13 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
 export default function SocialIcons() {
   return (
     <Box
+      component="span"
       sx={{
         boxSizing: "border-box",
         height: "100%",
         display: "flex",
         verticalAlign: "center",
+        width: 200,
       }}
     >
       <StyledIconButton aria-label="add an ig">
