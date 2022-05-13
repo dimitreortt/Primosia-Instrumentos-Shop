@@ -1,6 +1,7 @@
 import React from "react";
 import SocialIcons from "./SocialIcons";
 import { Box, styled } from "@mui/system";
+import { CssBaseline } from "@mui/material";
 
 const StyledDiv = styled("div")(({ theme }) => ({
   color: theme.palette.primary.contrastText,
@@ -25,8 +26,18 @@ export default function UpperBar() {
           }}
         >
           <SocialIcons />
+          <CssBaseline />
         </Box>
       </StyledDiv>
+      <Box
+        sx={{
+          // fontFamily: "Koulen, cursive",
+          fontFamily: "Raleway",
+          fontSize: "100px",
+        }}
+      >
+        Raleway
+      </Box>
     </div>
   );
 }
