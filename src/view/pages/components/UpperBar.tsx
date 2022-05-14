@@ -3,6 +3,7 @@ import React from "react";
 import SocialIcons from "./SocialIcons";
 import { Box, styled } from "@mui/system";
 import { CssBaseline, Typography } from "@mui/material";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 const StyledDiv = styled("div")(({ theme }) => ({
   // color: theme.palette.primary.contrastText,
@@ -40,26 +41,18 @@ export default function UpperBar() {
           >
             <Typography
               sx={{
-                fontFamily: "GothamMedium, sans-serif",
+                fontFamily: "iCiel-Alina, sans-serif",
                 color: "primary.dark",
-                fontSize: 28,
+                fontSize: 24,
                 letterSpacing: 2,
               }}
             >
+              <WhatsAppIcon fontSize="medium" sx={{ marginBottom: -0.5 }} />{" "}
               WhatsApp: (15) 98139-3011
             </Typography>
           </Box>
         </Box>
       </StyledDiv>
-      <Box
-        sx={{
-          // fontFamily: "Koulen, cursive",
-          fontFamily: "GothamMedium, sans-serif",
-          fontSize: "100px",
-        }}
-      >
-        Raleway
-      </Box>
     </div>
   );
 }
