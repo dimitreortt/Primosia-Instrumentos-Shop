@@ -9,7 +9,7 @@ export const makeProducts = (rawProducts: any[]) => {
       categories: rawP.categories,
       attributes: rawP.attributes,
       images: rawP.images.map((i: any) => i.src),
-      price: rawP.price.replace(".", ","),
+      price: rawP.price,
     };
     return productObject;
     // return new Product(

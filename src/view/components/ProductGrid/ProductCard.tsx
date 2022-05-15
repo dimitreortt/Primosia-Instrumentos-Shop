@@ -2,7 +2,10 @@ import styled from "@emotion/styled";
 import { Box, Typography, Button, Card, IconButton } from "@mui/material";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { dispatchAddProduct } from "../../../application/store/actions/cartActions";
+import {
+  dispatchAddProduct,
+  dispatchRemoveProduct,
+} from "../../../application/store/actions/cartActions";
 import { ProductData } from "../../../application/store/actions/productsActions";
 import { RootState } from "../../../application/store/configureStore";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -34,22 +37,19 @@ export const ProductCard: FunctionComponent<Props> = ({ product }) => {
   const cartProducts = useSelector((state: RootState) => state.cart.products);
   const [quantityInCart, setQuantityInCart] = useState(0);
 
-  console.log(quantityInCart);
-
   useEffect(() => {
     const found = cartProducts.find((p) => p.product.id === product.id);
     if (found) setQuantityInCart(found.quantity);
   }, []);
 
   const handleBuyClick = () => {
-    console.log(product);
     dispatchAddProduct(product);
     setQuantityInCart(quantityInCart + 1);
   };
 
   const handleRemoveClick = () => {
     setQuantityInCart(quantityInCart - 1);
-    dispatchAddProduct(product);
+    dispatchRemoveProduct(product);
   };
 
   return (
@@ -107,7 +107,9 @@ export const ProductCard: FunctionComponent<Props> = ({ product }) => {
           color="primary"
         >
           R$:{" "}
-          {product.price.includes(",") ? product.price : product.price + ",00"}
+          {product.price.includes(".")
+            ? product.price.replace(".", ",")
+            : product.price.replace(".", ",") + ",00"}
         </Typography>
         {quantityInCart === 0 ? (
           <StyledButton variant="contained" onClick={handleBuyClick}>

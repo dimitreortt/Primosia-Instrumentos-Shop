@@ -1,5 +1,5 @@
 import { store } from "../configureStore";
-import { addProduct } from "../features/cartSlice";
+import { addProduct, removeProduct } from "../features/cartSlice";
 import { ProductData } from "./productsActions";
 
 export const dispatchAddProduct = (product: ProductData) => {
@@ -7,5 +7,5 @@ export const dispatchAddProduct = (product: ProductData) => {
 };
 
 export const dispatchRemoveProduct = (product: ProductData) => {
-  store.dispatch(addProduct(product));
+  store.dispatch(removeProduct(product));
 };

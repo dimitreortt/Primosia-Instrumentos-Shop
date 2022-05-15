@@ -1,9 +1,9 @@
-import "../components/upperBar.css";
+import "./upperBar.css";
 import React from "react";
-import SocialIcons from "./SocialIcons";
 import { Box, styled } from "@mui/system";
 import { CssBaseline, Typography } from "@mui/material";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import SocialIcons from "./SocialIcons";
 
 const StyledDiv = styled(Box)(({ theme }) => ({
   // color: theme.palette.primary.contrastText,

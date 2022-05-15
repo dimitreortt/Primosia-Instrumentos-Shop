@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { fetchProducts } from "../../application/service/fetchProducts";
-import { Header } from "./components/Header";
+import { Header } from "../components/Header/Header";
 import { ProductPage } from "./ProductPage";
 
 export function HomePage() {

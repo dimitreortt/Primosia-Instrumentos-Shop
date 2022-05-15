@@ -2,7 +2,7 @@ import { Box } from "@mui/system";
 import React, { FunctionComponent, useState } from "react";
 import { ProductGrid } from "../components/ProductGrid/ProductGrid";
 import { ProductsFilter } from "../components/ProductGrid/ProductsFilter";
-import { Header } from "./components/Header";
+import { Header } from "../components/Header/Header";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../application/store/configureStore";
