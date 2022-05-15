@@ -1,7 +1,13 @@
 import styled from "@emotion/styled";
-import { Box, Typography, Button, Card } from "@mui/material";
-import React, { FunctionComponent } from "react";
+import { Box, Typography, Button, Card, IconButton } from "@mui/material";
+import { FunctionComponent, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { dispatchAddProduct } from "../../../application/store/actions/cartActions";
 import { ProductData } from "../../../application/store/actions/productsActions";
+import { RootState } from "../../../application/store/configureStore";
+import RemoveIcon from "@mui/icons-material/Remove";
+import RemoveCircleOutlinedIcon from "@mui/icons-material/RemoveCircleOutlined";
+import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 
 type Props = {
   product: ProductData;
@@ -12,12 +18,10 @@ const StyledImg = styled("img")({
   height: "100%",
   objectFit: "contain",
   marginTop: 10,
-  // margin: "auto",
 });
 
 const StyledButton = styled(Button)({
   backgroundColor: "primary.dark",
-  //   color: "primary.dark",
   borderRadius: 20,
   fontWeight: 600,
   marginTop: 10,
@@ -27,10 +31,30 @@ const StyledButton = styled(Button)({
 });
 
 export const ProductCard: FunctionComponent<Props> = ({ product }) => {
+  const cartProducts = useSelector((state: RootState) => state.cart.products);
+  const [quantityInCart, setQuantityInCart] = useState(0);
+
+  console.log(quantityInCart);
+
+  useEffect(() => {
+    const found = cartProducts.find((p) => p.product.id === product.id);
+    if (found) setQuantityInCart(found.quantity);
+  }, []);
+
+  const handleBuyClick = () => {
+    console.log(product);
+    dispatchAddProduct(product);
+    setQuantityInCart(quantityInCart + 1);
+  };
+
+  const handleRemoveClick = () => {
+    setQuantityInCart(quantityInCart - 1);
+    dispatchAddProduct(product);
+  };
+
   return (
     <Card
       sx={{
-        // border: "1px solid black",
         width: 305,
         height: 500,
         display: "flex",
@@ -39,9 +63,6 @@ export const ProductCard: FunctionComponent<Props> = ({ product }) => {
         alignItems: "center",
         borderRadius: "10px",
         boxShadow: 1,
-        // "&:hover": {
-        //   cursor: "pointer",
-        // },
       }}
     >
       <Box
@@ -53,16 +74,11 @@ export const ProductCard: FunctionComponent<Props> = ({ product }) => {
         }}
         onClick={() => console.log("oi")}
       >
-        <StyledImg
-          // src="https://images.unsplash.com/photo-1533827432537-70133748f5c8"
-          src={product.images[0]}
-          alt="hat"
-        />
+        <StyledImg src={product.images[0]} alt="hat" />
       </Box>
       <Box
         sx={{
           width: "100%",
-          // height: "100%",
           backgroundColor: "#f8f8f8",
           textAlign: "center",
           paddingBottom: "10px",
@@ -74,11 +90,9 @@ export const ProductCard: FunctionComponent<Props> = ({ product }) => {
           sx={{
             fontFamily: "Koulen, sans-serif",
             fontSize: 20,
-            //   textTransform: "initial",
             textAlign: "center",
           }}
         >
-          {/* CAJON FSA DESIGN SERIES FC-6625 FAVELA ELETRICO */}
           {product.name}
         </Typography>
         <Typography
@@ -87,15 +101,44 @@ export const ProductCard: FunctionComponent<Props> = ({ product }) => {
             fontSize: 20,
             fontWeight: 600,
             letterSpacing: 1.5,
-            //   textTransform: "initial",
             textAlign: "center",
             marginTop: 1.2,
           }}
           color="primary"
         >
-          R$: 50,00
+          R$:{" "}
+          {product.price.includes(",") ? product.price : product.price + ",00"}
         </Typography>
-        <StyledButton variant="contained">Comprar</StyledButton>
+        {quantityInCart === 0 ? (
+          <StyledButton variant="contained" onClick={handleBuyClick}>
+            Comprar
+          </StyledButton>
+        ) : (
+          <div>
+            <IconButton sx={{ color: "primary" }} onClick={handleRemoveClick}>
+              <RemoveCircleOutlinedIcon
+                sx={{ color: "primary" }}
+                color="primary"
+              />
+            </IconButton>
+            <Typography
+              sx={{
+                fontFamily: "Koulen, sans-serif",
+                fontSize: 20,
+              }}
+              component="span"
+              color="primary.dark"
+            >
+              {quantityInCart}
+            </Typography>
+            <IconButton sx={{ color: "primary" }} onClick={handleBuyClick}>
+              <AddCircleOutlinedIcon
+                sx={{ backgroundColor: "primary" }}
+                color="primary"
+              />
+            </IconButton>
+          </div>
+        )}
       </Box>
     </Card>
   );

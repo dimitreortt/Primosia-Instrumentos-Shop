@@ -5,3 +5,7 @@ import { ProductData } from "./productsActions";
 export const dispatchAddProduct = (product: ProductData) => {
   store.dispatch(addProduct(product));
 };
+
+export const dispatchRemoveProduct = (product: ProductData) => {
+  store.dispatch(addProduct(product));
+};

@@ -29,8 +29,14 @@ export const cartSlice = createSlice({
         state.products.push({ product, quantity: 1 });
       }
     },
-    removeProduct: (state, action: PayloadAction<Product>) => {
+    removeProduct: (state, action: PayloadAction<ProductData>) => {
       const product = action.payload;
+      const found = state.products.find((p) => {
+        return p.product.id === product.id;
+      });
+      if (found) {
+        found.quantity -= 1;
+      }
     },
     resetCart: (state) => {
       state.products = [];

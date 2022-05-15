@@ -8,6 +8,7 @@ export type ProductData = {
   categories: { id: string; name: string; slug: string }[];
   attributes: { name: string; options: string[] }[];
   images: string[];
+  price: string;
 };
 
 export const dispatchSetProducts = (products: ProductData[]) => {
