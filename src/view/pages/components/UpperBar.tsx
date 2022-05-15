@@ -5,7 +5,7 @@ import { Box, styled } from "@mui/system";
 import { CssBaseline, Typography } from "@mui/material";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
-const StyledDiv = styled("div")(({ theme }) => ({
+const StyledDiv = styled(Box)(({ theme }) => ({
   // color: theme.palette.primary.contrastText,
   backgroundColor: theme.palette.primary.light,
   //   padding: theme.spacing(1),
@@ -17,10 +17,10 @@ const StyledDiv = styled("div")(({ theme }) => ({
 export default function UpperBar() {
   return (
     <div>
-      <StyledDiv>
+      <StyledDiv sx={{ boxShadow: 1 }}>
         <Box
           sx={{
-            border: "1px solid black",
+            // border: "1px solid black",
             width: 1200,
             maxWidth: 1200,
             height: "100%",

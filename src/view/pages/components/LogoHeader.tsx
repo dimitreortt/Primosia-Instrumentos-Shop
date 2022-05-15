@@ -18,9 +18,8 @@ export const LogoHeader: FunctionComponent<Props> = ({}) => {
     <Box sx={{ display: "flex", justifyContent: "center" }}>
       <Box
         sx={{
-          border: "1px solid black",
-          width: 1200,
-          maxWidth: 1200,
+          // border: "1px solid black",
+          width: "100%",
           height: "100%",
           boxSizing: "border-box",
           display: "flex",
