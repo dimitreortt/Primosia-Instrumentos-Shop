@@ -16,7 +16,7 @@ export const AppRouter: FunctionComponent<Props> = ({}) => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/sopro" element={<CategoryPage />} />
+        <Route path="/category/:category" element={<CategoryPage />} />
         <Route path="*" element={<App />}></Route>
       </Routes>
     </BrowserRouter>

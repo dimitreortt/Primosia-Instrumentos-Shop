@@ -8,7 +8,7 @@ export const makeProducts = (rawProducts: any[]) => {
       // categoryId: rawP.categories.map((c: any) => c.id).join(","),
       categories: rawP.categories,
       attributes: rawP.attributes,
-      images: rawP.images,
+      images: rawP.images.map((i: any) => i.src),
     };
     return productObject;
     // return new Product(

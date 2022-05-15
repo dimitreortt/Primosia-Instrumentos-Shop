@@ -28,7 +28,7 @@ export const NavigationMenu: FunctionComponent<Props> = ({}) => {
     // <Router>
     <StyledDiv sx={{ boxShadow: 1 }}>
       <CustomMenuItem to="/">Home</CustomMenuItem>
-      <CustomMenuItem to="/sopro">Sopro</CustomMenuItem>
+      <CustomMenuItem to="/category/sopro">Sopro</CustomMenuItem>
       <CustomMenuItem to="/percussao">Percussão</CustomMenuItem>
       <CustomMenuItem to="/corda">Corda</CustomMenuItem>
       <CustomMenuItem to="/acessorios">Acessórios</CustomMenuItem>

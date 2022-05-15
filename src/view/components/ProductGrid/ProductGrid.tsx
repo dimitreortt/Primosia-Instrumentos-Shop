@@ -3,6 +3,7 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { Box, Button } from "@mui/material";
 import { ProductCard } from "./ProductCard";
+import { ProductData } from "../../../application/store/actions/productsActions";
 
 const itemData = [
   {
@@ -55,42 +56,33 @@ const itemData = [
   },
 ];
 
-type Props = {};
+type Props = {
+  products: ProductData[];
+};
 
-export const ProductGrid: FunctionComponent<Props> = ({}) => {
+export const ProductGrid: FunctionComponent<Props> = ({ products }) => {
   return (
     <ImageList
       sx={{
-        position: "relative",
         width: "100%",
         height: "100%",
         boxSizing: "border-box",
       }}
       cols={3}
-      rowHeight={164}
+      // rowHeight={164}
     >
-      {itemData.map((item) => (
+      {products.map((product) => (
         <ProductCard
-          product={{
-            attributes: [],
-            images: [item.img],
-            id: item.img,
-            name: item.img,
-            categories: [],
-          }}
+          key={product.id}
+          product={product}
+          // product={{
+          //   attributes: [],
+          //   images: [item.img],
+          //   id: item.img,
+          //   name: item.img,
+          //   categories: [],
+          // }}
         />
-        // <Box key={item.img}>
-        //   <img
-        //     src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-        //     srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-        //     alt={item.title}
-        //     loading="lazy"
-        //   />
-        //   olá
-        //   <Button variant="text" color="primary">
-        //     trallaal
-        //   </Button>
-        // </Box>
       ))}
     </ImageList>
   );

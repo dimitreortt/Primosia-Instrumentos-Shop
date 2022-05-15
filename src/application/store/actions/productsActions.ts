@@ -6,7 +6,7 @@ export type ProductData = {
   name: string;
   id: string;
   categories: { id: string; name: string; slug: string }[];
-  attributes: string[];
+  attributes: { name: string; options: string[] }[];
   images: string[];
 };
 

@@ -35,6 +35,7 @@ export const ProductCard: FunctionComponent<Props> = ({ product }) => {
         height: 500,
         display: "flex",
         flexDirection: "column",
+        justifyContent: "space-between",
         alignItems: "center",
         borderRadius: "10px",
         boxShadow: 1,
@@ -60,6 +61,8 @@ export const ProductCard: FunctionComponent<Props> = ({ product }) => {
       </Box>
       <Box
         sx={{
+          width: "100%",
+          // height: "100%",
           backgroundColor: "#f8f8f8",
           textAlign: "center",
           paddingBottom: "10px",
@@ -75,7 +78,8 @@ export const ProductCard: FunctionComponent<Props> = ({ product }) => {
             textAlign: "center",
           }}
         >
-          CAJON FSA DESIGN SERIES FC-6625 FAVELA ELETRICO
+          {/* CAJON FSA DESIGN SERIES FC-6625 FAVELA ELETRICO */}
+          {product.name}
         </Typography>
         <Typography
           sx={{

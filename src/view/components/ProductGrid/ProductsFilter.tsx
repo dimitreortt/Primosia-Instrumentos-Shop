@@ -1,14 +1,45 @@
 import { Box, Divider, Typography } from "@mui/material";
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import Checkbox, { checkboxClasses } from "@mui/material/Checkbox";
 
-type Props = {};
+type Props = {
+  addTerm: (term: string) => void;
+  removeTerm: (term: string) => void;
+  filterName: string;
+  filterItems: string[];
+};
 
-const colors = ["Preto", "Branco", "Azul", "Marrom"];
+const colors = ["Preto", "Branco", "Azul", "Marrom", "Rosa"];
 
-export const ProductsFilter: FunctionComponent<Props> = ({}) => {
+export const ProductsFilter: FunctionComponent<Props> = ({
+  addTerm,
+  removeTerm,
+  filterName,
+  filterItems,
+}) => {
+  const [state, setState] = useState<any>({});
+
+  useEffect(() => {
+    let obj: any = {};
+    for (const color of colors) {
+      obj[color] = false;
+    }
+    setState(obj);
+  }, []);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newState = {
+      ...state,
+      [event.target.name]: event.target.checked,
+    };
+    setState(newState);
+    if (event.target.checked) addTerm(event.target.name);
+    else if (!event.target.checked) removeTerm(event.target.name);
+    // setFilterTerms(stateToStringArray(newState));
+  };
+
   return (
-    <Box>
+    <Box sx={{ width: 180 }}>
       <Typography
         sx={{
           fontFamily: "iCiel-Alina, sans-serif",
@@ -17,10 +48,10 @@ export const ProductsFilter: FunctionComponent<Props> = ({}) => {
           letterSpacing: 2,
         }}
       >
-        Cor
+        {filterName}
       </Typography>
       <Divider />
-      {colors.map((color) => {
+      {filterItems.map((color) => {
         return (
           <Box>
             <Checkbox
@@ -31,6 +62,9 @@ export const ProductsFilter: FunctionComponent<Props> = ({}) => {
                   color: "primary.dark",
                 },
               }}
+              checked={state[color] || false}
+              onChange={handleChange}
+              name={color}
             />
             <Typography
               sx={{
