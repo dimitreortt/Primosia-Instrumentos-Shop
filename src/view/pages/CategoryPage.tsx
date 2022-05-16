@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../application/store/configureStore";
 import { listBrands } from "../../domain/service/listBrands";
 import { listColors } from "../../domain/service/listColors";
+import { BaseStyledPage } from "./BaseStyledPage";
 
 type Props = {};
 
@@ -42,50 +43,41 @@ export const CategoryPage: FunctionComponent<Props> = ({}) => {
   const colors = listColors(categoryProducts);
 
   return (
-    <Box
-      sx={{
-        backgroundImage:
-          "url(https://i.pinimg.com/originals/c7/a0/ba/c7a0ba9fe40aca44f660f32fb4ad2545.jpg)",
-        backgroundSize: "cover",
-      }}
-    >
-      <Box sx={{ backgroundColor: "rgba(255, 255, 255, 0.6)" }}>
-        <Header />
+    <BaseStyledPage>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <Box
           sx={{
+            boxSizing: "border-box",
+            width: 1200,
+            maxWidth: 1200,
             display: "flex",
-            justifyContent: "center",
           }}
         >
-          <Box
-            sx={{
-              boxSizing: "border-box",
-              width: 1200,
-              maxWidth: 1200,
-              display: "flex",
-            }}
-          >
-            <Box sx={{ width: "20%", boxSizing: "border-box" }}>
-              <ProductsFilter
-                addTerm={addTerm}
-                removeTerm={removeTerm}
-                filterName="Cor"
-                filterItems={colors}
-              />
-              <Box sx={{ height: 20 }}></Box>
-              <ProductsFilter
-                addTerm={addTerm}
-                removeTerm={removeTerm}
-                filterName="Marca"
-                filterItems={brands}
-              />
-            </Box>
-            <Box sx={{ width: "80%", boxSizing: "border-box" }}>
-              <ProductGrid products={filtered} />
-            </Box>
+          <Box sx={{ width: "20%", boxSizing: "border-box" }}>
+            <ProductsFilter
+              addTerm={addTerm}
+              removeTerm={removeTerm}
+              filterName="Cor"
+              filterItems={colors}
+            />
+            <Box sx={{ height: 20 }}></Box>
+            <ProductsFilter
+              addTerm={addTerm}
+              removeTerm={removeTerm}
+              filterName="Marca"
+              filterItems={brands}
+            />
+          </Box>
+          <Box sx={{ width: "80%", boxSizing: "border-box" }}>
+            <ProductGrid products={filtered} />
           </Box>
         </Box>
       </Box>
-    </Box>
+    </BaseStyledPage>
   );
 };
