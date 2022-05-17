@@ -3,7 +3,7 @@ import { FunctionComponent } from "react";
 import { Header } from "../components/Header/Header";
 
 type Props = {
-    children: React.ReactNode
+  children: React.ReactNode;
 };
 
 export const BaseStyledPage: FunctionComponent<Props> = ({ children }) => {
@@ -17,7 +17,7 @@ export const BaseStyledPage: FunctionComponent<Props> = ({ children }) => {
         height: "100vh",
       }}
     >
-      <Box sx={{ backgroundColor: "rgba(255, 255, 255, 0.6)", height: "100%" }}>
+      <Box sx={{ backgroundColor: "rgba(255, 255, 255, 0.7)", height: "100%" }}>
         <Header />
         {children}
       </Box>

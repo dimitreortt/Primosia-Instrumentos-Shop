@@ -16,7 +16,7 @@ export const customTheme = createTheme({
       light: "#E4DFD3",
       main: "#E1D5B7",
       dark: "#D0BB8B",
-      contrastText: "#000",
+      contrastText: "#F7F6F2",
     },
     // success: {},
     // info: {},

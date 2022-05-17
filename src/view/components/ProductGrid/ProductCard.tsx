@@ -11,6 +11,7 @@ import { RootState } from "../../../application/store/configureStore";
 import RemoveIcon from "@mui/icons-material/Remove";
 import RemoveCircleOutlinedIcon from "@mui/icons-material/RemoveCircleOutlined";
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
+import { formatPrice } from "../../../application/service/formatPrice";
 
 type Props = {
   product: ProductData;
@@ -106,10 +107,7 @@ export const ProductCard: FunctionComponent<Props> = ({ product }) => {
           }}
           color="primary"
         >
-          R$:{" "}
-          {product.price.includes(".")
-            ? product.price.replace(".", ",")
-            : product.price.replace(".", ",") + ",00"}
+          R$: {formatPrice(product.price)}
         </Typography>
         {quantityInCart === 0 ? (
           <StyledButton variant="contained" onClick={handleBuyClick}>

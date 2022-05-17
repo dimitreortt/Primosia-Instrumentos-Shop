@@ -5,6 +5,8 @@ import { Box, Typography } from "@mui/material";
 import { CustomCartIcon } from "./CustomCartIcon";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../application/store/configureStore";
+import { Link } from "react-router-dom";
+import { formatPrice } from "../../../application/service/formatPrice";
 
 type Props = {};
 
@@ -15,10 +17,8 @@ const StyledButton = styled(Button)(({ theme }) => ({
   letterSpacing: 2,
   fontWeight: 599,
   textTransform: "none",
-  //   display: "inline-block",
   padding: 0,
   borderRadius: 30,
-  //   padding: 10,
 }));
 
 export const CartButton: FunctionComponent<Props> = ({}) => {
@@ -27,7 +27,6 @@ export const CartButton: FunctionComponent<Props> = ({}) => {
   const [priceSum, setPriceSum] = useState(0);
 
   useEffect(() => {
-    console.log(cartProducts.length);
     const numberOfItems = cartProducts.reduce(
       (numberOfItems, product) => product.quantity + numberOfItems,
       0
@@ -42,6 +41,11 @@ export const CartButton: FunctionComponent<Props> = ({}) => {
     setPriceSum(priceSum);
   }, [cartProducts]);
 
+  const onClick = () => {
+    //@ts-ignore
+    window.location = "/checkout";
+  };
+
   return (
     <Box
       sx={{
@@ -53,41 +57,42 @@ export const CartButton: FunctionComponent<Props> = ({}) => {
         position: "relative",
       }}
     >
-      <StyledButton variant="text">
+      {/*@ts-ignore */}
+      <StyledButton component={Link} to="/checkout" variant="text">
         <CustomCartIcon />
         Ver Carrinho
       </StyledButton>
       {numberOfItems > 0 && (
-        <Typography
-          textAlign={"center"}
-          sx={{
-            // marginTop: -2.2,
-            fontStyle: "italic",
-            fontFamily: "Koulen",
-            color: "primary.dark",
-            // typography: "subtitle2",
-            position: "absolute",
-            left: 0,
-            right: 0,
-            marginLeft: "auto",
-            marginRight: "auto",
-            bottom: 15,
-            "&:hover": {
-              cursor: "pointer",
-            },
-          }}
-        >
-          <span>
-            {numberOfItems}{" "}
-            <span>{numberOfItems === 1 ? "item" : "itens"}</span>
-          </span>
-          <Box sx={{ marginLeft: 2 }} component="span">
-            R${" "}
-            {priceSum.toString().includes(".")
-              ? priceSum.toString().replace(".", ",")
-              : priceSum.toString().replace(".", ",") + ",00"}
-          </Box>
-        </Typography>
+        <Link to={`/checkout`}>
+          <Typography
+            component="span"
+            textAlign={"center"}
+            sx={{
+              // marginTop: -2.2,
+              fontStyle: "italic",
+              fontFamily: "Koulen",
+              color: "primary.dark",
+              // typography: "subtitle2",
+              position: "absolute",
+              left: 0,
+              right: 0,
+              marginLeft: "auto",
+              marginRight: "auto",
+              bottom: 15,
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+          >
+            <span>
+              {numberOfItems}{" "}
+              <span>{numberOfItems === 1 ? "item" : "itens"}</span>
+            </span>
+            <Box sx={{ marginLeft: 2 }} component="span">
+              R$ {formatPrice(priceSum)}
+            </Box>
+          </Typography>
+        </Link>
       )}
     </Box>
   );
