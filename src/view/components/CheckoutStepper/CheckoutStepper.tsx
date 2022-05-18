@@ -8,128 +8,113 @@ import Typography from "@mui/material/Typography";
 import { BuyerInformationForm } from "./BuyerInformationForm";
 import { ShippingMethodBox } from "./ShippingMethodBox";
 import { PaymentBox } from "./PaymentBox/PaymentBox";
+import { Breadcrumbs, styled } from "@mui/material";
+import { defaultBuyerInfoState } from "./defaultBuyerInfoState";
 
-const steps = [
-  "Select campaign settings",
-  "Create an ad group",
-  "Create an ad",
-];
+function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+  event.preventDefault();
+  console.info("You clicked a breadcrumb.");
+}
+
+const NoEffectButton = styled(Button)({
+  "&:hover": {
+    bgcolor: "transparent",
+  },
+});
 
 export function CheckoutStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
-  const [completed, setCompleted] = React.useState<{
-    [k: number]: boolean;
-  }>({});
+  const [buyerInfoState, setBuyerInfoState] = React.useState(
+    defaultBuyerInfoState
+  );
+  const [shippingMethod, setShippingMethod] = React.useState("");
 
-  const totalSteps = () => {
-    return steps.length;
+  const map: any = {
+    info: 0,
+    shipping: 1,
+    payment: 2,
   };
 
-  const completedSteps = () => {
-    return Object.keys(completed).length;
-  };
-
-  const isLastStep = () => {
-    return activeStep === totalSteps() - 1;
-  };
-
-  const allStepsCompleted = () => {
-    return completedSteps() === totalSteps();
-  };
-
-  const handleNext = () => {
-    const newActiveStep =
-      isLastStep() && !allStepsCompleted()
-        ? // It's the last step, but not all steps have been completed,
-          // find the first step that has been completed
-          steps.findIndex((step, i) => !(i in completed))
-        : activeStep + 1;
-    setActiveStep(newActiveStep);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleStep = (step: number) => () => {
-    setActiveStep(step);
-  };
-
-  const handleComplete = () => {
-    const newCompleted = completed;
-    newCompleted[activeStep] = true;
-    setCompleted(newCompleted);
-    handleNext();
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-    setCompleted({});
+  const setStep = (step: string) => {
+    setActiveStep(map[step]);
   };
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Stepper nonLinear activeStep={activeStep}>
-        {steps.map((label, index) => (
-          <Step key={label} completed={completed[index]}>
-            <StepButton color="inherit" onClick={handleStep(index)}>
-              {label}
-            </StepButton>
-          </Step>
-        ))}
-      </Stepper>
+      <div role="presentation" onClick={handleClick}>
+        <Breadcrumbs aria-label="breadcrumb">
+          <Button
+            variant="text"
+            color="primary"
+            sx={{
+              textTransform: "none",
+              fontFamily: "Heuvetica Neue",
+              padding: 0,
+              "&:hover": {
+                bgcolor: "transparent",
+              },
+            }}
+            onClick={() => setStep("info")}
+          >
+            Informações
+          </Button>
+          <Button
+            variant="text"
+            color="primary"
+            sx={{
+              fontFamily: "Heuvetica Neue",
+              padding: 0,
+              textTransform: "none",
+              "&:hover": {
+                bgcolor: "transparent",
+              },
+            }}
+            onClick={() => setStep("shipping")}
+          >
+            Entrega
+          </Button>
+          <Button
+            variant="text"
+            color="primary"
+            sx={{
+              fontFamily: "Heuvetica Neue",
+              textTransform: "none",
+              padding: 0,
+              "&:hover": {
+                bgcolor: "transparent",
+              },
+            }}
+            onClick={() => setStep("payment")}
+          >
+            Pagamento
+          </Button>
+          <Typography color="text.primary">Breadcrumbs</Typography>
+        </Breadcrumbs>
+      </div>
       <div>
-        {allStepsCompleted() ? (
-          <React.Fragment>
-            <Typography sx={{ mt: 2, mb: 1 }}>
-              All steps completed - you&apos;re finished
-            </Typography>
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Box sx={{ flex: "1 1 auto" }} />
-              <Button onClick={handleReset}>Reset</Button>
-            </Box>
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            <Box sx={{ mt: 2, mb: 1 }}>
-              <Box sx={{ ml: 2 }}>
-                Step {activeStep + 1}
-                {activeStep === 0 && <BuyerInformationForm />}
-                {activeStep === 1 && <ShippingMethodBox />}
-                {activeStep === 2 && <PaymentBox />}
-              </Box>
-            </Box>
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Button
-                color="inherit"
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                Back
-              </Button>
-              <Box sx={{ flex: "1 1 auto" }} />
-              <Button onClick={handleNext} sx={{ mr: 1 }}>
-                Next
-              </Button>
-              {activeStep !== steps.length &&
-                (completed[activeStep] ? (
-                  <Typography
-                    variant="caption"
-                    sx={{ display: "inline-block" }}
-                  >
-                    Step {activeStep + 1} already completed
-                  </Typography>
-                ) : (
-                  <Button onClick={handleComplete}>
-                    {completedSteps() === totalSteps() - 1
-                      ? "Finish"
-                      : "Complete Step"}
-                  </Button>
-                ))}
-            </Box>
-          </React.Fragment>
-        )}
+        <Box>
+          {activeStep === 0 && (
+            <BuyerInformationForm
+              setStep={setStep}
+              buyerInfoState={buyerInfoState}
+              setBuyerInfoState={setBuyerInfoState}
+            />
+          )}
+          {activeStep === 1 && (
+            <ShippingMethodBox
+              setStep={setStep}
+              shippingMethod={shippingMethod}
+              setShippingMethod={setShippingMethod}
+            />
+          )}
+          {activeStep === 2 && (
+            <PaymentBox
+              shippingMethod={shippingMethod}
+              buyerInfoState={buyerInfoState}
+              setStep={setStep}
+            />
+          )}
+        </Box>
       </div>
     </Box>
   );

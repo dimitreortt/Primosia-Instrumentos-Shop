@@ -1,6 +1,7 @@
 import { Box } from "@mui/system";
 import { FunctionComponent } from "react";
 import { Header } from "../components/Header/Header";
+import waterMarkBg from "../../assets/watermark-bg.jpg";
 
 type Props = {
   children: React.ReactNode;
@@ -10,8 +11,8 @@ export const BaseStyledPage: FunctionComponent<Props> = ({ children }) => {
   return (
     <Box
       sx={{
-        backgroundImage:
-          "url(https://i.pinimg.com/originals/c7/a0/ba/c7a0ba9fe40aca44f660f32fb4ad2545.jpg)",
+        backgroundImage: `url(${waterMarkBg})`,
+        // "url(https://i.pinimg.com/originals/c7/a0/ba/c7a0ba9fe40aca44f660f32fb4ad2545.jpg)",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         height: "100vh",

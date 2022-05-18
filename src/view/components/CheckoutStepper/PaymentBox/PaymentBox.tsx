@@ -9,14 +9,24 @@ import { ShiipingMethodItem } from "../ShiipingMethodItem";
 import { styled } from "@mui/system";
 import { CurrentInfoBox } from "./CurrentInfoBox";
 import { PaymentInfoBox } from "./PaymentInfoBox";
+import { defaultBuyerInfoState } from "../defaultBuyerInfoState";
 
-type Props = {};
+type Props = {
+  shippingMethod: string;
+  buyerInfoState: typeof defaultBuyerInfoState;
+  setStep: (step: string) => void;
+};
 
-export const PaymentBox: FunctionComponent<Props> = ({}) => {
+export const PaymentBox: FunctionComponent<Props> = ({
+  shippingMethod,
+  buyerInfoState,
+  setStep,
+}) => {
   return (
     <Box
       sx={{
-        width: 550,
+        // width: 550,
+        maxWidth: 550,
         backgroundColor: "secondary.contrastText",
         padding: 3,
         paddingBottom: 5,
@@ -24,7 +34,11 @@ export const PaymentBox: FunctionComponent<Props> = ({}) => {
         borderRadius: 1,
       }}
     >
-      <CurrentInfoBox />
+      <CurrentInfoBox
+        shippingMethod={shippingMethod}
+        buyerInfoState={buyerInfoState}
+        setStep={setStep}
+      />
       <PaymentInfoBox />
     </Box>
   );

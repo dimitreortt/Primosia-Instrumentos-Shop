@@ -10,7 +10,7 @@ export function TestPage() {
     if (!mp) return;
 
     const cardForm = mp.cardForm({
-      amount: "0.5",
+      amount: "0.51",
       autoMount: true,
       form: {
         id: "form-checkout",
@@ -84,7 +84,7 @@ export function TestPage() {
                 payment_method_id,
                 transaction_amount: Number(amount),
                 installments: Number(installments),
-                description: "Descrição do produto",
+                description: "Produto de Teste",
                 payer: {
                   email,
                   identification: {

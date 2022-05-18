@@ -9,18 +9,13 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { FormEventHandler, FunctionComponent, useState } from "react";
+import { Link } from "react-router-dom";
+import { defaultBuyerInfoState } from "./defaultBuyerInfoState";
 
-type Props = {};
-
-const defaultValues = {
-  name: "",
-  email: "",
-  cpf: "",
-  celular: "",
-  address: "",
-  city: "",
-  state: "",
-  cep: "",
+type Props = {
+  setStep: (step: string) => void;
+  setBuyerInfoState: (state: typeof defaultBuyerInfoState) => void;
+  buyerInfoState: typeof defaultBuyerInfoState;
 };
 
 const StyledTypography = styled(Typography, {
@@ -31,20 +26,38 @@ const StyledTypography = styled(Typography, {
   letterSpacing: 2,
 });
 
-export const BuyerInformationForm: FunctionComponent<Props> = ({}) => {
-  const [formValues, setFormValues] = useState(defaultValues);
+export const BuyerInformationForm: FunctionComponent<Props> = ({
+  setStep,
+  buyerInfoState,
+  setBuyerInfoState,
+}) => {
+  // const [formValues, setFormValues] = useState(buyerInfoState);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
-    setFormValues({
-      ...formValues,
+    setBuyerInfoState({
+      ...buyerInfoState,
       [name]: value,
     });
   };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    console.log(formValues);
+    console.log(buyerInfoState);
+  };
+
+  const infoOk = () => {
+    for (const key in defaultBuyerInfoState) {
+      //@ts-ignore
+      if (!buyerInfoState[key]) return false;
+    }
+    console.log("ok");
+    return true;
+  };
+
+  const handleMoveOn = () => {
+    if (infoOk()) setStep("shipping");
+    else alert("Info not ok!");
   };
 
   return (
@@ -56,7 +69,9 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({}) => {
           padding: 3,
           paddingBottom: 5,
           boxShadow: 1,
-          borderRadius: 1,
+          // borderRadius: 1,
+          borderBottomLeftRadius: 1,
+          borderTopLeftRadius: 1,
         }}
       >
         <Box sx={{ flexGrow: 1 }}>
@@ -66,10 +81,10 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({}) => {
               <TextField
                 fullWidth
                 size="small"
-                id="nome-completo"
-                name="nome"
+                id="nomecompleto"
+                name="name"
                 label="Nome completo"
-                value={formValues.name}
+                value={buyerInfoState.name}
                 onChange={handleInputChange}
               />
             </Grid>
@@ -80,7 +95,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({}) => {
                 id="email"
                 name="email"
                 label="E-mail"
-                value={formValues.email}
+                value={buyerInfoState.email}
                 onChange={handleInputChange}
               />
             </Grid>
@@ -91,7 +106,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({}) => {
                 id="cpf"
                 name="cpf"
                 label="CPF"
-                value={formValues.cpf}
+                value={buyerInfoState.cpf}
                 onChange={handleInputChange}
               />
             </Grid>
@@ -102,7 +117,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({}) => {
                 id="celular"
                 name="celular"
                 label="Celular"
-                value={formValues.celular}
+                value={buyerInfoState.celular}
                 onChange={handleInputChange}
               />
             </Grid>
@@ -115,7 +130,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({}) => {
                   id="cep"
                   name="cep"
                   label="CEP"
-                  value={formValues.cep}
+                  value={buyerInfoState.cep}
                   onChange={handleInputChange}
                 />
                 <Box sx={{ width: "24px" }}></Box>
@@ -125,7 +140,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({}) => {
                   id="state"
                   name="state"
                   label="Estado"
-                  value={formValues.state}
+                  value={buyerInfoState.state}
                   onChange={handleInputChange}
                 />
               </Box>
@@ -137,7 +152,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({}) => {
                 id="address"
                 name="address"
                 label="Endereço"
-                value={formValues.address}
+                value={buyerInfoState.address}
                 onChange={handleInputChange}
               />
             </Grid>
@@ -145,10 +160,10 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({}) => {
               <TextField
                 fullWidth
                 size="small"
-                id="address"
-                name="address"
+                id="addressComplement"
+                name="addressComplement"
                 label="Complemento"
-                value={formValues.address}
+                value={buyerInfoState.addressComplement}
                 onChange={handleInputChange}
               />
             </Grid>
@@ -159,7 +174,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({}) => {
                 id="city"
                 name="city"
                 label="Cidade"
-                value={formValues.city}
+                value={buyerInfoState.city}
                 onChange={handleInputChange}
               />
             </Grid>
@@ -170,11 +185,18 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({}) => {
                 color="primary"
                 type="submit"
                 sx={{ paddingY: 2 }}
+                onClick={handleMoveOn}
               >
                 Prosseguir para entrega
               </Button>
-              <Button variant="text" color="primary" sx={{ marginLeft: 1 }}>
-                Retornar
+              <Button
+                component={Link}
+                to="/cart"
+                variant="text"
+                color="primary"
+                sx={{ marginLeft: 1 }}
+              >
+                Retornar ao carrinho
               </Button>
             </Grid>
           </Grid>

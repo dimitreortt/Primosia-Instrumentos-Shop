@@ -4,6 +4,7 @@ import {
   Divider,
   FormControl,
   FormControlLabel,
+  Paper,
   Radio,
   RadioGroup,
   Typography,
@@ -12,6 +13,7 @@ import React, { FunctionComponent } from "react";
 import { CreditCardsLogos } from "./CreditCardsLogos";
 import { CreditCardOptionItem } from "./CreditCardOptionItem";
 import { MercadoPagoForm } from "./MercadoPagoForm";
+import { PanoramaPhotosphereSelectOutlined } from "@mui/icons-material";
 
 type Props = {};
 
@@ -19,7 +21,8 @@ export const PaymentInfoBox: FunctionComponent<Props> = ({}) => {
   const [value, setValue] = React.useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue((event.target as HTMLInputElement).value);
+    const sentValue = (event.target as HTMLInputElement).value;
+    setValue(sentValue === value ? "" : sentValue);
   };
 
   return (
@@ -45,7 +48,16 @@ export const PaymentInfoBox: FunctionComponent<Props> = ({}) => {
             onChange={handleChange}
             sx={{ width: "100%" }}
           >
-            <Box sx={{ display: "flex", width: "100%" }}>
+            <Typography
+              component="span"
+              sx={{
+                display: "flex",
+                width: "100%",
+                "&:hover": { cursor: "pointer" },
+              }}
+              // @ts-ignore
+              onClick={() => handleChange({ target: { value: "credit" } })}
+            >
               <FormControlLabel
                 // sx={{ width: 60 }}
                 value="credit"
@@ -53,18 +65,22 @@ export const PaymentInfoBox: FunctionComponent<Props> = ({}) => {
                 label={""}
               />
               <CreditCardOptionItem />
-            </Box>
+            </Typography>
             <Divider />
             <Collapse in={value === "credit"}>
               <Box sx={{ backgroundColor: "secondary.light" }}>
-                <MercadoPagoForm />
+                <Box
+                  sx={{ backgroundColor: "rgba(255,255,255,0.5)", padding: 1 }}
+                >
+                  <MercadoPagoForm />
+                </Box>
               </Box>
               <Divider />
             </Collapse>
             <FormControlLabel
-              value="female"
+              value="boleto"
               control={<Radio />}
-              label="Female"
+              label="Boleto"
             />
           </RadioGroup>
         </FormControl>

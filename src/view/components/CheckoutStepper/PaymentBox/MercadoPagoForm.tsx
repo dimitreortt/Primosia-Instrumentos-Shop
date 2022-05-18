@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import { useMercadopago } from "react-sdk-mercadopago";
 import { getMPAccessToken } from "./getMPAccessToken";
+import TextField from "@mui/material/TextField";
+import { Button, FormControl, Grid, InputLabel, Select } from "@mui/material";
+import { Box } from "@mui/system";
+import { StyledSelect } from "./StyledSelect";
+import { StyledInfoType } from "./StyledInfoType";
 
 export function MercadoPagoForm() {
   const mp = useMercadopago.v2(getMPAccessToken(), {
@@ -85,7 +90,7 @@ export function MercadoPagoForm() {
                 payment_method_id,
                 transaction_amount: Number(amount),
                 installments: Number(installments),
-                description: "Descrição do produto",
+                description: "Produto de Teste",
                 payer: {
                   email,
                   identification: {
@@ -115,47 +120,95 @@ export function MercadoPagoForm() {
   }, [mp]);
 
   return (
-    <div>
-      <form id="form-checkout">
-        <input type="text" name="cardNumber" id="form-checkout__cardNumber" />
-        <input
-          type="text"
-          name="expirationDate"
-          id="form-checkout__expirationDate"
-        />
-        <input
-          type="text"
-          name="cardholderName"
-          id="form-checkout__cardholderName"
-        />
-        <input
-          type="email"
-          name="cardholderEmail"
-          id="form-checkout__cardholderEmail"
-        />
-        <input
-          type="text"
-          name="securityCode"
-          id="form-checkout__securityCode"
-        />
-        <select name="issuer" id="form-checkout__issuer"></select>
-        <select
-          name="identificationType"
-          id="form-checkout__identificationType"
-        ></select>
-        <input
-          type="text"
-          name="identificationNumber"
-          id="form-checkout__identificationNumber"
-        />
-        <select name="installments" id="form-checkout__installments"></select>
-        <button type="submit" id="form-checkout__submit">
-          Pagar
-        </button>
-        <progress value="0" className="progress-bar">
-          Carregando...
-        </progress>
-      </form>
-    </div>
+    <form id="form-checkout">
+      <Grid container spacing={1}>
+        <Grid item xs={8}>
+          <StyledInfoType>Número do Cartão</StyledInfoType>
+          <TextField
+            fullWidth
+            size="small"
+            type="text"
+            name="cardNumber"
+            id="form-checkout__cardNumber"
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <StyledInfoType>Validade</StyledInfoType>
+          <TextField
+            type="text"
+            size="small"
+            name="expirationDate"
+            id="form-checkout__expirationDate"
+            placeholder="00/00"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <StyledInfoType>Nome do Titular</StyledInfoType>
+          <TextField
+            fullWidth
+            size="small"
+            type="text"
+            name="cardholderName"
+            id="form-checkout__cardholderName"
+          />
+        </Grid>
+        <Grid item xs={5}>
+          <StyledInfoType>Cód. de Segurança</StyledInfoType>
+          <TextField
+            fullWidth
+            size="small"
+            type="text"
+            name="securityCode"
+            id="form-checkout__securityCode"
+          />
+        </Grid>
+        <Grid item xs={7}>
+          <StyledInfoType>E-mail</StyledInfoType>
+          <TextField
+            fullWidth
+            size="small"
+            type="email"
+            name="cardholderEmail"
+            id="form-checkout__cardholderEmail"
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <StyledInfoType>Parcelas</StyledInfoType>
+          <StyledSelect
+            name="installments"
+            id="form-checkout__installments"
+          ></StyledSelect>
+        </Grid>
+        <Grid item xs={6}>
+          {" "}
+          <Button
+            variant="contained"
+            fullWidth
+            type="submit"
+            id="form-checkout__submit"
+            sx={{ mt: 2.3 }}
+          >
+            Pagar
+          </Button>
+        </Grid>
+        <Grid item xs={6}>
+          <StyledSelect
+            name="identificationType"
+            id="form-checkout__identificationType"
+          ></StyledSelect>
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            type="text"
+            name="identificationNumber"
+            id="form-checkout__identificationNumber"
+          />
+        </Grid>
+        <StyledSelect name="issuer" id="form-checkout__issuer"></StyledSelect>
+      </Grid>
+      {/* <progress value="0" className="progress-bar">
+                Carregando...
+      </progress> */}
+    </form>
   );
 }
