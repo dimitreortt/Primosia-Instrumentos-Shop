@@ -4,6 +4,7 @@ import {
   InputAdornment,
   TextField,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { FunctionComponent } from "react";
@@ -21,6 +22,8 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
 }));
 
 export const SearchBox: FunctionComponent<Props> = ({}) => {
+  const theme = useTheme();
+
   return (
     <Box
       sx={{
@@ -38,6 +41,10 @@ export const SearchBox: FunctionComponent<Props> = ({}) => {
           fontSize: 26,
           letterSpacing: 4,
           textAlign: "center",
+          [theme.breakpoints.down("sm")]: {
+            fontSize: 24,
+            letterSpacing: 2,
+          },
         }}
       >
         Bem vindo à Primosia! O que procura?

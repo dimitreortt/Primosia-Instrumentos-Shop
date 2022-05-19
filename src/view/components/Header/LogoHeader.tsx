@@ -18,12 +18,9 @@ export const LogoHeader: FunctionComponent<Props> = ({}) => {
     <Box sx={{ display: "flex", justifyContent: "center" }}>
       <Box
         sx={{
-          // border: "1px solid black",
           width: "100%",
           height: "100%",
           boxSizing: "border-box",
-          // display: "flex",
-          // justifyContent: "space-between",
         }}
       >
         <Grid container spacing={2}>
@@ -34,10 +31,10 @@ export const LogoHeader: FunctionComponent<Props> = ({}) => {
               <StyledImg src={logoRef} alt="logo" height={100} />
             </Box>
           </Grid>
-          <Grid item xs={12} md={6} sx={{ mx: 1 }}>
+          <Grid item xs={12} md={6}>
             <SearchBox />
           </Grid>
-          <Grid item display={{ xs: "none", md: "block" }}>
+          <Grid item md={3} display={{ xs: "none", md: "inline-block" }}>
             <CartButton />
           </Grid>
         </Grid>
