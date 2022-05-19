@@ -33,7 +33,7 @@ export const Header: FunctionComponent<Props> = ({}) => {
             maxWidth: 1200,
           }}
         >
-          {/* <LogoHeader /> */}
+          <LogoHeader />
           {/* <NavigationMenu /> */}
           {/* <MyDivider thiccness={10} /> */}
           <MyDivider />

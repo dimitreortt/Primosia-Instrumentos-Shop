@@ -22,19 +22,25 @@ export const LogoHeader: FunctionComponent<Props> = ({}) => {
           width: "100%",
           height: "100%",
           boxSizing: "border-box",
-          display: "flex",
+          // display: "flex",
           // justifyContent: "space-between",
         }}
       >
-        <Box sx={{ width: "25%", display: "flex", justifyContent: "center" }}>
-          <StyledImg src={logoRef} alt="logo" height={100} />
-        </Box>
-        <Box sx={{ width: "50%" }}>
-          <SearchBox />
-        </Box>
-        <Box sx={{ width: "25%" }}>
-          <CartButton />
-        </Box>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={3}>
+            <Box
+              sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+            >
+              <StyledImg src={logoRef} alt="logo" height={100} />
+            </Box>
+          </Grid>
+          <Grid item xs={12} md={6} sx={{ mx: 1 }}>
+            <SearchBox />
+          </Grid>
+          <Grid item display={{ xs: "none", md: "block" }}>
+            <CartButton />
+          </Grid>
+        </Grid>
       </Box>
     </Box>
   );
