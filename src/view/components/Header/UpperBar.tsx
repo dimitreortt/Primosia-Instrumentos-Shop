@@ -1,7 +1,12 @@
 import "./upperBar.css";
 import React from "react";
 import { Box, styled } from "@mui/system";
-import { CssBaseline, Typography } from "@mui/material";
+import {
+  CssBaseline,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import SocialIcons from "./SocialIcons";
 
@@ -15,6 +20,9 @@ const StyledDiv = styled(Box)(({ theme }) => ({
 }));
 
 export default function UpperBar() {
+  const theme = useTheme();
+  const aboveSm = useMediaQuery(theme.breakpoints.up("sm"));
+
   return (
     <div>
       <StyledDiv sx={{ boxShadow: 1 }}>
@@ -43,11 +51,17 @@ export default function UpperBar() {
               sx={{
                 fontFamily: "iCiel-Alina, sans-serif",
                 color: "primary.dark",
-                fontSize: 24,
-                letterSpacing: 2,
+                fontSize: aboveSm ? 24 : 15,
+                letterSpacing: aboveSm ? 2 : 0.5,
+                // marginRight: !aboveSm ? 6 : 0,
+                marginRight: 0.5,
+                textAlign: "end",
               }}
             >
-              <WhatsAppIcon fontSize="medium" sx={{ marginBottom: -0.5 }} />{" "}
+              <WhatsAppIcon
+                fontSize={aboveSm ? "medium" : "small"}
+                sx={{ marginBottom: -0.5 }}
+              />{" "}
               WhatsApp: (15) 98139-3011
             </Typography>
           </Box>

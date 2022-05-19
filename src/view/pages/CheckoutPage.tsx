@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import React, { FunctionComponent } from "react";
 import { CheckoutStepper } from "../components/CheckoutStepper/CheckoutStepper";
 import { BaseStyledPage } from "./BaseStyledPage";
@@ -15,6 +15,45 @@ const StyledImage = styled("img")({
 });
 
 export const CheckoutPage: FunctionComponent<Props> = ({}) => {
+  const onClick = () => {
+    const buyerInfo = {
+      cep: "05318030",
+    };
+
+    const orderInfo = {
+      peso: 1,
+      comprimento: 10,
+      largura: 10,
+      altura: 10,
+    };
+
+    const body = { buyerInfo, orderInfo };
+
+    fetch(
+      "https://us-central1-primosia-intrumentos-musicais.cloudfunctions.net/delivery_taxes",
+      {
+        method: "post",
+        headers: {
+          // Authorization: this.authorization,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    )
+      .then((response) => {
+        //do something awesome that makes the world a better place
+        return response.json();
+      })
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  };
+
   return (
     <Box
       sx={{
@@ -41,6 +80,9 @@ export const CheckoutPage: FunctionComponent<Props> = ({}) => {
             <Box sx={{ p: 7, border: "1px black solid" }}></Box>
             <Box sx={{ p: 7, border: "1px black solid" }}></Box>
           </Box>
+          <Button variant="contained" color="primary" onClick={onClick}>
+            click me
+          </Button>
           <CheckoutStepper />
         </Box>
       </Box>

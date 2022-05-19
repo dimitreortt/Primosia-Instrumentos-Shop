@@ -10,12 +10,16 @@ import {
 import { Box } from "@mui/system";
 import React, { FormEventHandler, FunctionComponent, useState } from "react";
 import { Link } from "react-router-dom";
+import { validateCep } from "../../../application/service/validateCep";
+import { validateCpf } from "../../../application/service/validateCpf";
+import { fetchDeliveryTimeAndPrice } from "./CorreiosIntegration/fetchDeliveryTimeAndPrice";
 import { defaultBuyerInfoState } from "./defaultBuyerInfoState";
 
 type Props = {
   setStep: (step: string) => void;
   setBuyerInfoState: (state: typeof defaultBuyerInfoState) => void;
   buyerInfoState: typeof defaultBuyerInfoState;
+  fetchCorreiosInfo: () => void;
 };
 
 const StyledTypography = styled(Typography, {
@@ -30,8 +34,11 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
   setStep,
   buyerInfoState,
   setBuyerInfoState,
+  fetchCorreiosInfo,
 }) => {
   // const [formValues, setFormValues] = useState(buyerInfoState);
+  const [cpfHelperText, setCpfHelperText] = useState("");
+  const [cepHelperText, setCepHelperText] = useState("");
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -58,6 +65,29 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
   const handleMoveOn = () => {
     if (infoOk()) setStep("shipping");
     else alert("Info not ok!");
+  };
+
+  const handleCpfOnBlur = () => {
+    const currentCpf = buyerInfoState["cpf"];
+
+    if (!validateCpf(currentCpf)) {
+      setCpfHelperText("CPF Inválido");
+    } else {
+      // console.log("aqui a gente dispara a porra do fetch dos correios =DDDD");
+      setCpfHelperText("");
+    }
+  };
+
+  const handleCepOnBlur = () => {
+    const currentCep = buyerInfoState["cep"];
+
+    if (!validateCep(currentCep)) {
+      setCepHelperText("CEP Inválido");
+    } else {
+      // console.log("aqui a gente dispara a porra do fetch dos correios =DDDD");
+      setCepHelperText("");
+      fetchCorreiosInfo();
+    }
   };
 
   return (
@@ -101,6 +131,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
             </Grid>
             <Grid item xs={6}>
               <TextField
+                error={!!cpfHelperText}
                 fullWidth
                 size="small"
                 id="cpf"
@@ -108,6 +139,8 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
                 label="CPF"
                 value={buyerInfoState.cpf}
                 onChange={handleInputChange}
+                onBlur={handleCpfOnBlur}
+                helperText={cpfHelperText}
               />
             </Grid>
             <Grid item xs={6}>
@@ -126,10 +159,13 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
               <Box sx={{ display: "flex" }}>
                 <TextField
                   fullWidth
+                  error={!!cepHelperText}
+                  helperText={cepHelperText}
                   size="small"
                   id="cep"
                   name="cep"
                   label="CEP"
+                  onBlur={handleCepOnBlur}
                   value={buyerInfoState.cep}
                   onChange={handleInputChange}
                 />

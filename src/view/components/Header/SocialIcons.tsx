@@ -9,10 +9,17 @@ import { Box, styled } from "@mui/system";
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.primary.dark,
   margin: 2,
+  [theme.breakpoints.down("sm")]: {
+    margin: 0,
+  },
   size: "large",
   "& > *": {
     fontSize: 30,
     borderRadius: 10,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 20,
+      padding: 0,
+    },
     // fontWeight: 600,
   },
 }));
@@ -26,7 +33,7 @@ export default function SocialIcons() {
         height: "100%",
         display: "flex",
         verticalAlign: "center",
-        width: 200,
+        // width: 200,
       }}
     >
       <StyledIconButton aria-label="add an ig">

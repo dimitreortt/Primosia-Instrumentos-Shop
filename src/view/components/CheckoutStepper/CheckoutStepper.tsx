@@ -10,6 +10,7 @@ import { ShippingMethodBox } from "./ShippingMethodBox";
 import { PaymentBox } from "./PaymentBox/PaymentBox";
 import { Breadcrumbs, styled } from "@mui/material";
 import { defaultBuyerInfoState } from "./defaultBuyerInfoState";
+import { fetchDeliveryTimeAndPrice } from "./CorreiosIntegration/fetchDeliveryTimeAndPrice";
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
@@ -37,6 +38,10 @@ export function CheckoutStepper() {
 
   const setStep = (step: string) => {
     setActiveStep(map[step]);
+  };
+
+  const fetchCorreiosInfo = () => {
+    fetchDeliveryTimeAndPrice(buyerInfoState);
   };
 
   return (
@@ -98,6 +103,7 @@ export function CheckoutStepper() {
               setStep={setStep}
               buyerInfoState={buyerInfoState}
               setBuyerInfoState={setBuyerInfoState}
+              fetchCorreiosInfo={fetchCorreiosInfo}
             />
           )}
           {activeStep === 1 && (

@@ -9,3 +9,5 @@ export const defaultBuyerInfoState = {
   state: "",
   cep: "",
 };
+
+export type BuyerInfo = typeof defaultBuyerInfoState;

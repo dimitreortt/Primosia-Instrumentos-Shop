@@ -4,6 +4,7 @@ import { LogoHeader } from "./LogoHeader";
 import { NavigationMenu } from "./NavigationMenu";
 import UpperBar from "./UpperBar";
 import Divider from "@mui/material/Divider";
+import { useTheme } from "@mui/material";
 
 type Props = {};
 
@@ -14,6 +15,8 @@ const MyDivider = styled(Divider)(({ theme }) => ({
 }));
 
 export const Header: FunctionComponent<Props> = ({}) => {
+  const theme = useTheme();
+
   return (
     <div>
       <UpperBar />
@@ -30,8 +33,8 @@ export const Header: FunctionComponent<Props> = ({}) => {
             maxWidth: 1200,
           }}
         >
-          <LogoHeader />
-          <NavigationMenu />
+          {/* <LogoHeader /> */}
+          {/* <NavigationMenu /> */}
           {/* <MyDivider thiccness={10} /> */}
           <MyDivider />
         </Box>
