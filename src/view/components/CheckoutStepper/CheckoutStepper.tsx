@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import { BuyerInformationForm } from "./BuyerInformationForm";
 import { ShippingMethodBox } from "./ShippingMethodBox";
 import { PaymentBox } from "./PaymentBox/PaymentBox";
-import { Breadcrumbs, styled } from "@mui/material";
+import { Breadcrumbs, styled, useMediaQuery } from "@mui/material";
 import { defaultBuyerInfoState } from "./defaultBuyerInfoState";
 import { fetchDeliveryTimeAndPrice } from "./CorreiosIntegration/fetchDeliveryTimeAndPrice";
 
@@ -29,6 +29,7 @@ export function CheckoutStepper() {
     defaultBuyerInfoState
   );
   const [shippingMethod, setShippingMethod] = React.useState("");
+  const below500 = useMediaQuery("(max-width:500px)");
 
   const map: any = {
     info: 0,
@@ -45,7 +46,7 @@ export function CheckoutStepper() {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{}}>
       <div role="presentation" onClick={handleClick}>
         <Breadcrumbs aria-label="breadcrumb">
           <Button
@@ -97,7 +98,13 @@ export function CheckoutStepper() {
         </Breadcrumbs>
       </div>
       <div>
-        <Box>
+        <Box
+          sx={{
+            // padding: below500 ? 1 : 0,
+            boxSizing: "border-box",
+            maxWidth: 500,
+          }}
+        >
           {activeStep === 0 && (
             <BuyerInformationForm
               setStep={setStep}

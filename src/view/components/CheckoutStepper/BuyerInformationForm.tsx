@@ -94,8 +94,9 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
     <form onSubmit={handleSubmit}>
       <Box
         sx={{
-          width: 500,
+          width: "100%",
           backgroundColor: "secondary.contrastText",
+          boxSizing: "border-box",
           padding: 3,
           paddingBottom: 5,
           boxShadow: 1,

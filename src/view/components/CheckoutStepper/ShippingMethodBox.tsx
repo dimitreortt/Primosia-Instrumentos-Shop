@@ -36,7 +36,8 @@ export const ShippingMethodBox: FunctionComponent<Props> = ({
   return (
     <Box
       sx={{
-        width: 500,
+        width: "100%",
+        boxSizing: "border-box",
         backgroundColor: "secondary.contrastText",
         padding: 3,
         paddingBottom: 5,

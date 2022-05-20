@@ -26,9 +26,13 @@ export const PaymentInfoBox: FunctionComponent<Props> = ({}) => {
   };
 
   return (
-    <Box>
-      <p>Payment</p>
-      <p>All transactions are secure and encrypted.</p>
+    <Box sx={{ mt: 2 }}>
+      <Typography sx={{ fontFamily: "iCiel-Alina", fontSize: 30 }}>
+        Pagamento
+      </Typography>
+      <Typography sx={{ fontFamily: "Heuvetica Neue" }}>
+        Todas as transações são seguras e criptografadas.
+      </Typography>
 
       <Box
         sx={{

@@ -26,9 +26,10 @@ export const PaymentBox: FunctionComponent<Props> = ({
     <Box
       sx={{
         // width: 550,
-        maxWidth: 550,
+        width: "100%",
         backgroundColor: "secondary.contrastText",
         padding: 3,
+        boxSizing: "border-box",
         paddingBottom: 5,
         boxShadow: 1,
         borderRadius: 1,
