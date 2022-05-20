@@ -9,6 +9,7 @@ import { RootState } from "../../application/store/configureStore";
 import { listBrands } from "../../domain/service/listBrands";
 import { listColors } from "../../domain/service/listColors";
 import { BaseStyledPage } from "./BaseStyledPage";
+import { Grid } from "@mui/material";
 
 type Props = {};
 
@@ -53,29 +54,38 @@ export const CategoryPage: FunctionComponent<Props> = ({}) => {
         <Box
           sx={{
             boxSizing: "border-box",
-            width: 1200,
-            maxWidth: 1200,
+            width: "100%",
+            // maxWidth: "100%",
             display: "flex",
           }}
         >
-          <Box sx={{ width: "20%", boxSizing: "border-box" }}>
-            <ProductsFilter
-              addTerm={addTerm}
-              removeTerm={removeTerm}
-              filterName="Cor"
-              filterItems={colors}
-            />
-            <Box sx={{ height: 20 }}></Box>
-            <ProductsFilter
-              addTerm={addTerm}
-              removeTerm={removeTerm}
-              filterName="Marca"
-              filterItems={brands}
-            />
-          </Box>
-          <Box sx={{ width: "80%", boxSizing: "border-box" }}>
-            <ProductGrid products={filtered} />
-          </Box>
+          <Grid container>
+            <Grid
+              item
+              xs={0}
+              md={2}
+              sx={{ display: { xs: "none", md: "block" } }}
+            >
+              <ProductsFilter
+                addTerm={addTerm}
+                removeTerm={removeTerm}
+                filterName="Cor"
+                filterItems={colors}
+              />
+              <Box sx={{ height: 20 }}></Box>
+              <ProductsFilter
+                addTerm={addTerm}
+                removeTerm={removeTerm}
+                filterName="Marca"
+                filterItems={brands}
+              />
+            </Grid>
+            <Grid item xs={12} md={10}>
+              <ProductGrid products={filtered} />
+            </Grid>
+          </Grid>
+          {/* <Box sx={{ width: "20%", boxSizing: "border-box" }}></Box>
+          <Box sx={{ width: "80%", boxSizing: "border-box" }}></Box> */}
         </Box>
       </Box>
     </BaseStyledPage>

@@ -1,9 +1,11 @@
 import React, { FunctionComponent } from "react";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import { ProductCard } from "./ProductCard";
 import { ProductData } from "../../../application/store/actions/productsActions";
+import { useTheme } from "@mui/system";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const itemData = [
   {
@@ -61,6 +63,11 @@ type Props = {
 };
 
 export const ProductGrid: FunctionComponent<Props> = ({ products }) => {
+  const theme = useTheme();
+  const above600 = useMediaQuery("(min-width:600px)");
+
+  const cols = above600 ? 3 : 2;
+
   return (
     <ImageList
       sx={{
@@ -68,21 +75,13 @@ export const ProductGrid: FunctionComponent<Props> = ({ products }) => {
         height: "100%",
         boxSizing: "border-box",
       }}
-      cols={3}
+      cols={cols}
       // rowHeight={164}
     >
       {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          product={product}
-          // product={{
-          //   attributes: [],
-          //   images: [item.img],
-          //   id: item.img,
-          //   name: item.img,
-          //   categories: [],
-          // }}
-        />
+        <Box sx={{ padding: 0.5 }}>
+          <ProductCard key={product.id} product={product} />
+        </Box>
       ))}
     </ImageList>
   );

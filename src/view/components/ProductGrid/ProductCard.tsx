@@ -1,6 +1,14 @@
 import styled from "@emotion/styled";
-import { Box, Typography, Button, Card, IconButton } from "@mui/material";
-import { FunctionComponent, useEffect, useState } from "react";
+import {
+  Box,
+  Typography,
+  Button,
+  Card,
+  IconButton,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   dispatchAddProduct,
@@ -26,6 +34,7 @@ const StyledImg = styled("img")({
 
 const StyledButton = styled(Button)({
   backgroundColor: "primary.dark",
+  width: "50%",
   borderRadius: 20,
   fontWeight: 600,
   marginTop: 10,
@@ -37,6 +46,9 @@ const StyledButton = styled(Button)({
 export const ProductCard: FunctionComponent<Props> = ({ product }) => {
   const cartProducts = useSelector((state: RootState) => state.cart.products);
   const [quantityInCart, setQuantityInCart] = useState(0);
+  const below800 = useMediaQuery("(max-width:800px)");
+  const below600 = useMediaQuery("(max-width:600px)");
+  const theme = useTheme();
 
   useEffect(() => {
     const found = cartProducts.find((p) => p.product.id === product.id);
@@ -53,11 +65,15 @@ export const ProductCard: FunctionComponent<Props> = ({ product }) => {
     dispatchRemoveProduct(product);
   };
 
+  const fontSize = below800 ? 16 : 20;
+
   return (
     <Card
       sx={{
-        width: 305,
-        height: 500,
+        width: "100%",
+        height: below800 ? 380 : 430,
+        minHeight: below800 ? 380 : 430,
+
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -68,7 +84,7 @@ export const ProductCard: FunctionComponent<Props> = ({ product }) => {
     >
       <Box
         sx={{
-          height: 400,
+          height: "60%",
           "&:hover": {
             cursor: "pointer",
           },
@@ -80,17 +96,21 @@ export const ProductCard: FunctionComponent<Props> = ({ product }) => {
       <Box
         sx={{
           width: "100%",
+          height: "40%",
           backgroundColor: "#f8f8f8",
           textAlign: "center",
           paddingBottom: "10px",
           paddingTop: "10px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
         }}
       >
         <Typography
           color="primary"
           sx={{
             fontFamily: "Koulen, sans-serif",
-            fontSize: 20,
+            fontSize,
             textAlign: "center",
           }}
         >
@@ -99,7 +119,7 @@ export const ProductCard: FunctionComponent<Props> = ({ product }) => {
         <Typography
           sx={{
             fontFamily: "Koulen, sans-serif",
-            fontSize: 20,
+            fontSize,
             fontWeight: 600,
             letterSpacing: 1.5,
             textAlign: "center",
@@ -109,36 +129,40 @@ export const ProductCard: FunctionComponent<Props> = ({ product }) => {
         >
           R$: {formatPrice(product.price)}
         </Typography>
-        {quantityInCart === 0 ? (
-          <StyledButton variant="contained" onClick={handleBuyClick}>
-            Comprar
-          </StyledButton>
-        ) : (
-          <div>
-            <IconButton sx={{ color: "primary" }} onClick={handleRemoveClick}>
-              <RemoveCircleOutlinedIcon
-                sx={{ color: "primary" }}
-                color="primary"
-              />
-            </IconButton>
-            <Typography
-              sx={{
-                fontFamily: "Koulen, sans-serif",
-                fontSize: 20,
-              }}
-              component="span"
-              color="primary.dark"
-            >
-              {quantityInCart}
-            </Typography>
-            <IconButton sx={{ color: "primary" }} onClick={handleBuyClick}>
-              <AddCircleOutlinedIcon
-                sx={{ backgroundColor: "primary" }}
-                color="primary"
-              />
-            </IconButton>
-          </div>
-        )}
+        <Box sx={{ mb: 1 }}>
+          {quantityInCart === 0 ? (
+            <Box>
+              <StyledButton variant="contained" onClick={handleBuyClick}>
+                Comprar
+              </StyledButton>
+            </Box>
+          ) : (
+            <div>
+              <IconButton sx={{ color: "primary" }} onClick={handleRemoveClick}>
+                <RemoveCircleOutlinedIcon
+                  sx={{ color: "primary" }}
+                  color="primary"
+                />
+              </IconButton>
+              <Typography
+                sx={{
+                  fontFamily: "Koulen, sans-serif",
+                  fontSize,
+                }}
+                component="span"
+                color="primary.dark"
+              >
+                {quantityInCart}
+              </Typography>
+              <IconButton sx={{ color: "primary" }} onClick={handleBuyClick}>
+                <AddCircleOutlinedIcon
+                  sx={{ backgroundColor: "primary" }}
+                  color="primary"
+                />
+              </IconButton>
+            </div>
+          )}
+        </Box>
       </Box>
     </Card>
   );

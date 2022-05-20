@@ -39,7 +39,7 @@ export const ProductsFilter: FunctionComponent<Props> = ({
   };
 
   return (
-    <Box sx={{ width: 180 }}>
+    <Box sx={{ width: "100%" }}>
       <Typography
         sx={{
           fontFamily: "iCiel-Alina, sans-serif",
