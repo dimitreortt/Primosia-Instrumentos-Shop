@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import Button from "@mui/material/Button";
-import { styled } from "@mui/system";
+import { styled, useTheme } from "@mui/system";
 import { Box, Typography } from "@mui/material";
 import { CustomCartIcon } from "./CustomCartIcon";
 import { useSelector } from "react-redux";
@@ -8,12 +8,16 @@ import { RootState } from "../../../application/store/configureStore";
 import { Link } from "react-router-dom";
 import { formatPrice } from "../../../application/service/formatPrice";
 
-type Props = {};
+type Props = { size?: number };
 
-const StyledButton = styled(Button)(({ theme }) => ({
+const StyledButton = styled(Button, { shouldForwardProp: () => true })<{
+  size?: number;
+}>(({ theme, size }) => ({
   color: theme.palette.primary.dark,
   fontFamily: "iCiel-Alina, sans-serif",
+  // fontSize: size ? size : 38,
   fontSize: 38,
+  [theme.breakpoints.down("md")]: { fontSize: 23 },
   letterSpacing: 2,
   fontWeight: 599,
   textTransform: "none",
@@ -21,10 +25,11 @@ const StyledButton = styled(Button)(({ theme }) => ({
   borderRadius: 30,
 }));
 
-export const CartButton: FunctionComponent<Props> = ({}) => {
+export const CartButton: FunctionComponent<Props> = ({ size }) => {
   const cartProducts = useSelector((state: RootState) => state.cart.products);
   const [numberOfItems, setNumberOfItems] = useState(0);
   const [priceSum, setPriceSum] = useState(0);
+  const theme = useTheme();
 
   useEffect(() => {
     const numberOfItems = cartProducts.reduce(
@@ -79,6 +84,10 @@ export const CartButton: FunctionComponent<Props> = ({}) => {
               marginLeft: "auto",
               marginRight: "auto",
               bottom: 15,
+              [theme.breakpoints.down("md")]: {
+                bottom: -8,
+                fontSize: 12,
+              },
               "&:hover": {
                 cursor: "pointer",
               },

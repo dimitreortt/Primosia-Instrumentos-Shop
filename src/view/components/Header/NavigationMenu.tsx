@@ -2,6 +2,7 @@ import { MenuItem, Paper } from "@mui/material";
 import { Box, styled } from "@mui/system";
 import React, { FunctionComponent } from "react";
 import { Link, BrowserRouter as Router } from "react-router-dom";
+import { NavBar } from "./NavMenu";
 
 type Props = {};
 
@@ -26,16 +27,14 @@ const CustomMenuItem = styled(Link)(({ theme }) => ({
 export const NavigationMenu: FunctionComponent<Props> = ({}) => {
   return (
     // <Router>
-    <StyledDiv sx={{ boxShadow: 1 }}>
-      <CustomMenuItem to="/">Home</CustomMenuItem>
-      <CustomMenuItem to="/category/sopro">Sopro</CustomMenuItem>
-      <CustomMenuItem to="/percussao">Percussão</CustomMenuItem>
-      <CustomMenuItem to="/corda">Corda</CustomMenuItem>
-      <CustomMenuItem to="/acessorios">Acessórios</CustomMenuItem>
-      {/* <Link to="first" style={{ textDecoration: "none" }}>
-          <MenuItem style={{ paddingLeft: 13 }}>Team 1</MenuItem>
-        </Link> */}
-    </StyledDiv>
+    // <StyledDiv sx={{ boxShadow: 1 }}>
+    //   <CustomMenuItem to="/">Home</CustomMenuItem>
+    //   <CustomMenuItem to="/category/sopro">Sopro</CustomMenuItem>
+    //   <CustomMenuItem to="/percussao">Percussão</CustomMenuItem>
+    //   <CustomMenuItem to="/corda">Corda</CustomMenuItem>
+    //   <CustomMenuItem to="/acessorios">Acessórios</CustomMenuItem>
+    // </StyledDiv>
     // </Router>
+    <NavBar />
   );
 };

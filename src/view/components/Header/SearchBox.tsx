@@ -32,6 +32,9 @@ export const SearchBox: FunctionComponent<Props> = ({}) => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
+        [theme.breakpoints.down("md")]: {
+          px: 2,
+        },
       }}
     >
       <Typography

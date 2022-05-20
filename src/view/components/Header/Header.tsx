@@ -34,7 +34,7 @@ export const Header: FunctionComponent<Props> = ({}) => {
           }}
         >
           <LogoHeader />
-          {/* <NavigationMenu /> */}
+          <NavigationMenu />
           {/* <MyDivider thiccness={10} /> */}
           <MyDivider />
         </Box>
