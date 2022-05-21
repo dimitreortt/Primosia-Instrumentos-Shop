@@ -37,15 +37,17 @@ export const ShippingMethodBox: FunctionComponent<Props> = ({
     <Box
       sx={{
         width: "100%",
-        boxSizing: "border-box",
         backgroundColor: "secondary.contrastText",
+        boxSizing: "border-box",
         padding: 3,
         paddingBottom: 5,
         boxShadow: 1,
-        borderRadius: 1,
+        // borderRadius: 1,
+        borderBottomLeftRadius: 3,
+        borderTopLeftRadius: 3,
       }}
     >
-      <FormControl>
+      <FormControl sx={{ width: "100%" }}>
         <FormLabel id="demo-radio-buttons-group-label">
           Método de entrega
         </FormLabel>
@@ -55,6 +57,7 @@ export const ShippingMethodBox: FunctionComponent<Props> = ({
           name="radio-buttons-group"
           value={shippingMethod}
           onChange={handleChange}
+          sx={{ width: "100%" }}
         >
           <FormControlLabel
             value="PAC"
@@ -67,6 +70,7 @@ export const ShippingMethodBox: FunctionComponent<Props> = ({
           <FormControlLabel
             value="SEDEX"
             control={<Radio />}
+            sx={{ width: "100%" }}
             label={
               <ShiipingMethodItem
                 methodName="SEDEX"

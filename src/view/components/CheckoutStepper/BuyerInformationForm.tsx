@@ -101,8 +101,8 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
           paddingBottom: 5,
           boxShadow: 1,
           // borderRadius: 1,
-          borderBottomLeftRadius: 1,
-          borderTopLeftRadius: 1,
+          borderBottomLeftRadius: 3,
+          borderTopLeftRadius: 3,
         }}
       >
         <Box sx={{ flexGrow: 1 }}>

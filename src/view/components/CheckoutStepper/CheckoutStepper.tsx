@@ -46,7 +46,7 @@ export function CheckoutStepper() {
   };
 
   return (
-    <Box sx={{}}>
+    <Box sx={{ boxSizing: "border-box" }}>
       <div role="presentation" onClick={handleClick}>
         <Breadcrumbs aria-label="breadcrumb">
           <Button
@@ -100,9 +100,11 @@ export function CheckoutStepper() {
       <div>
         <Box
           sx={{
-            // padding: below500 ? 1 : 0,
+            padding: below500 ? 1 : 0,
             boxSizing: "border-box",
-            maxWidth: 500,
+            width: below500 ? "100%" : 500,
+
+            // maxWidth: 500,
           }}
         >
           {activeStep === 0 && (

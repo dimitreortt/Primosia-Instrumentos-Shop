@@ -8,6 +8,7 @@ import {
   Radio,
   RadioGroup,
   Typography,
+  Button,
 } from "@mui/material";
 import React, { FunctionComponent } from "react";
 import { CreditCardsLogos } from "./CreditCardsLogos";
@@ -89,6 +90,13 @@ export const PaymentInfoBox: FunctionComponent<Props> = ({}) => {
           </RadioGroup>
         </FormControl>
       </Box>
+
+      <Button variant="contained" color="primary" sx={{ mt: 1, width: "50%" }}>
+        Pagar
+      </Button>
+      <Button variant="text" color="primary" sx={{ mt: 1, width: "50%" }}>
+        Retornar
+      </Button>
     </Box>
   );
 };
