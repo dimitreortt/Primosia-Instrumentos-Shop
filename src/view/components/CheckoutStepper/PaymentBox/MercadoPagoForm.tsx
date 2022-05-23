@@ -121,7 +121,7 @@ export function MercadoPagoForm() {
 
   return (
     <form id="form-checkout">
-      <Grid container spacing={1}>
+      <Grid container spacing={1.1}>
         <Grid item xs={8}>
           <StyledInfoType>Número do Cartão</StyledInfoType>
           <TextField
@@ -180,6 +180,26 @@ export function MercadoPagoForm() {
           ></StyledSelect>
         </Grid>
         <Grid item xs={6}>
+          <StyledInfoType>Banco Emissor</StyledInfoType>
+          <StyledSelect name="issuer" id="form-checkout__issuer"></StyledSelect>
+        </Grid>
+        <Grid item xs={6}>
+          <StyledInfoType>Documento</StyledInfoType>
+          <StyledSelect
+            name="identificationType"
+            id="form-checkout__identificationType"
+          ></StyledSelect>
+        </Grid>
+        <Grid item xs={6}>
+          <StyledInfoType>Número do Documento</StyledInfoType>
+          <TextField
+            size="small"
+            type="text"
+            name="identificationNumber"
+            id="form-checkout__identificationNumber"
+          />
+        </Grid>
+        <Grid item xs={12}>
           {" "}
           <Button
             variant="contained"
@@ -191,20 +211,6 @@ export function MercadoPagoForm() {
             Pagar
           </Button>
         </Grid>
-        <Grid item xs={6}>
-          <StyledSelect
-            name="identificationType"
-            id="form-checkout__identificationType"
-          ></StyledSelect>
-        </Grid>
-        <Grid item xs={6}>
-          <TextField
-            type="text"
-            name="identificationNumber"
-            id="form-checkout__identificationNumber"
-          />
-        </Grid>
-        <StyledSelect name="issuer" id="form-checkout__issuer"></StyledSelect>
       </Grid>
       {/* <progress value="0" className="progress-bar">
                 Carregando...

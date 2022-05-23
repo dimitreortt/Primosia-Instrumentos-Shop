@@ -72,12 +72,11 @@ export const PaymentInfoBox: FunctionComponent<Props> = ({}) => {
             </Typography>
             <Divider />
             <Collapse in={value === "credit"}>
-              <Box sx={{ backgroundColor: "secondary.light" }}>
-                <Box
+              <Box
                 // sx={{ backgroundColor: "rgba(255,255,255,0.5)", padding: 1 }}
-                >
-                  <MercadoPagoForm />
-                </Box>
+                sx={{ my: 1.5 }}
+              >
+                <MercadoPagoForm />
               </Box>
               <Divider />
             </Collapse>
@@ -89,11 +88,19 @@ export const PaymentInfoBox: FunctionComponent<Props> = ({}) => {
           </RadioGroup>
         </FormControl>
       </Box>
-
+      {/* 
       <Button variant="contained" color="primary" sx={{ mt: 1, width: "50%" }}>
         Pagar
-      </Button>
-      <Button variant="text" color="primary" sx={{ mt: 1, width: "50%" }}>
+      </Button> */}
+      <Button
+        variant="contained"
+        sx={{
+          backgroundColor: "secondary.dark",
+          mt: 1,
+          width: "50%",
+          textAlign: "start",
+        }}
+      >
         Retornar
       </Button>
     </Box>
