@@ -14,6 +14,7 @@ import { validateCep } from "../../../application/service/validateCep";
 import { validateCpf } from "../../../application/service/validateCpf";
 import { fetchDeliveryTimeAndPrice } from "./CorreiosIntegration/fetchDeliveryTimeAndPrice";
 import { defaultBuyerInfoState } from "./defaultBuyerInfoState";
+import { StyledTypography } from "./FormsNamesCustomTypography";
 
 type Props = {
   setStep: (step: string) => void;
@@ -21,14 +22,6 @@ type Props = {
   buyerInfoState: typeof defaultBuyerInfoState;
   fetchCorreiosInfo: () => void;
 };
-
-const StyledTypography = styled(Typography, {
-  shouldForwardProp: () => true,
-})({
-  fontFamily: "iCiel-Alina",
-  fontSize: 26,
-  letterSpacing: 2,
-});
 
 export const BuyerInformationForm: FunctionComponent<Props> = ({
   setStep,

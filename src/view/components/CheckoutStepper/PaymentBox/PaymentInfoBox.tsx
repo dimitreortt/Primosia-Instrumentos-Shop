@@ -15,6 +15,7 @@ import { CreditCardsLogos } from "./CreditCardsLogos";
 import { CreditCardOptionItem } from "./CreditCardOptionItem";
 import { MercadoPagoForm } from "./MercadoPagoForm";
 import { PanoramaPhotosphereSelectOutlined } from "@mui/icons-material";
+import { StyledTypography } from "../FormsNamesCustomTypography";
 
 type Props = {};
 
@@ -28,9 +29,7 @@ export const PaymentInfoBox: FunctionComponent<Props> = ({}) => {
 
   return (
     <Box sx={{ mt: 2 }}>
-      <Typography sx={{ fontFamily: "iCiel-Alina", fontSize: 30 }}>
-        Pagamento
-      </Typography>
+      <StyledTypography>Pagamento</StyledTypography>
       <Typography sx={{ fontFamily: "Heuvetica Neue" }}>
         Todas as transações são seguras e criptografadas.
       </Typography>

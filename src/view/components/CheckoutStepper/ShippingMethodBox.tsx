@@ -6,6 +6,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { ShiipingMethodItem } from "./ShiipingMethodItem";
+import { StyledTypography } from "./FormsNamesCustomTypography";
 
 type Props = {
   setStep: (step: string) => void;
@@ -49,7 +50,7 @@ export const ShippingMethodBox: FunctionComponent<Props> = ({
     >
       <FormControl sx={{ width: "100%" }}>
         <FormLabel id="demo-radio-buttons-group-label">
-          Método de entrega
+          <StyledTypography>Método de Entrega</StyledTypography>
         </FormLabel>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
