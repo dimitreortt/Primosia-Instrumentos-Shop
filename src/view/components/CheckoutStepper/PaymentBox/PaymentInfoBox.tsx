@@ -74,7 +74,7 @@ export const PaymentInfoBox: FunctionComponent<Props> = ({}) => {
             <Collapse in={value === "credit"}>
               <Box sx={{ backgroundColor: "secondary.light" }}>
                 <Box
-                  sx={{ backgroundColor: "rgba(255,255,255,0.5)", padding: 1 }}
+                // sx={{ backgroundColor: "rgba(255,255,255,0.5)", padding: 1 }}
                 >
                   <MercadoPagoForm />
                 </Box>

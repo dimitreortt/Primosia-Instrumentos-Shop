@@ -10,6 +10,7 @@ import { styled } from "@mui/system";
 import { CurrentInfoBox } from "./CurrentInfoBox";
 import { PaymentInfoBox } from "./PaymentInfoBox";
 import { defaultBuyerInfoState } from "../defaultBuyerInfoState";
+import { CustomCheckoutStepperBox } from "../CustomCheckoutStepperBox";
 
 type Props = {
   shippingMethod: string;
@@ -23,24 +24,13 @@ export const PaymentBox: FunctionComponent<Props> = ({
   setStep,
 }) => {
   return (
-    <Box
-      sx={{
-        // width: 550,
-        width: "100%",
-        backgroundColor: "secondary.contrastText",
-        padding: 3,
-        boxSizing: "border-box",
-        paddingBottom: 5,
-        boxShadow: 1,
-        borderRadius: 1,
-      }}
-    >
+    <CustomCheckoutStepperBox>
       <CurrentInfoBox
         shippingMethod={shippingMethod}
         buyerInfoState={buyerInfoState}
         setStep={setStep}
       />
       <PaymentInfoBox />
-    </Box>
+    </CustomCheckoutStepperBox>
   );
 };

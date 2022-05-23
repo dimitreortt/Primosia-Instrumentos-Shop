@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { validateCep } from "../../../application/service/validateCep";
 import { validateCpf } from "../../../application/service/validateCpf";
 import { fetchDeliveryTimeAndPrice } from "./CorreiosIntegration/fetchDeliveryTimeAndPrice";
+import { CustomCheckoutStepperBox } from "./CustomCheckoutStepperBox";
 import { CustomTextField } from "./CustomTextField";
 import { defaultBuyerInfoState } from "./defaultBuyerInfoState";
 import { StyledTypography } from "./FormsNamesCustomTypography";
@@ -86,7 +87,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <Box
+      {/* <Box
         sx={{
           width: "100%",
           backgroundColor: "secondary.contrastText",
@@ -98,7 +99,8 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
           borderBottomLeftRadius: 3,
           borderTopLeftRadius: 3,
         }}
-      >
+      > */}
+      <CustomCheckoutStepperBox>
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={1.5} sx={{ width: "100%" }}>
             <Grid item xs={12}>
@@ -232,7 +234,8 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
             </Grid>
           </Grid>
         </Box>
-      </Box>
+      </CustomCheckoutStepperBox>
+      {/* </Box> */}
     </form>
   );
 };

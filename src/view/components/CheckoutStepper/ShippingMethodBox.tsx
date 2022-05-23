@@ -7,6 +7,7 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { ShiipingMethodItem } from "./ShiipingMethodItem";
 import { StyledTypography } from "./FormsNamesCustomTypography";
+import { CustomCheckoutStepperBox } from "./CustomCheckoutStepperBox";
 
 type Props = {
   setStep: (step: string) => void;
@@ -35,19 +36,7 @@ export const ShippingMethodBox: FunctionComponent<Props> = ({
   };
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        backgroundColor: "secondary.contrastText",
-        boxSizing: "border-box",
-        padding: 3,
-        paddingBottom: 5,
-        boxShadow: 1,
-        // borderRadius: 1,
-        borderBottomLeftRadius: 3,
-        borderTopLeftRadius: 3,
-      }}
-    >
+    <CustomCheckoutStepperBox>
       <FormControl sx={{ width: "100%" }}>
         <FormLabel id="demo-radio-buttons-group-label">
           <StyledTypography>Método de Entrega</StyledTypography>
@@ -91,13 +80,13 @@ export const ShippingMethodBox: FunctionComponent<Props> = ({
           sx={{ paddingY: 1 }}
           onClick={handleMoveOn}
         >
-          Prosseguir para entrega
+          Prosseguir para pagamento
         </Button>
         <Button variant="text" color="primary" sx={{ marginLeft: 1 }}>
           Retornar
         </Button>
       </Box>
-    </Box>
+    </CustomCheckoutStepperBox>
   );
 };
 
