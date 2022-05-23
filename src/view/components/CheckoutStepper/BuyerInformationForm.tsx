@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { validateCep } from "../../../application/service/validateCep";
 import { validateCpf } from "../../../application/service/validateCpf";
 import { fetchDeliveryTimeAndPrice } from "./CorreiosIntegration/fetchDeliveryTimeAndPrice";
+import { CustomTextField } from "./CustomTextField";
 import { defaultBuyerInfoState } from "./defaultBuyerInfoState";
 import { StyledTypography } from "./FormsNamesCustomTypography";
 
@@ -102,7 +103,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
           <Grid container spacing={1.5} sx={{ width: "100%" }}>
             <Grid item xs={12}>
               <StyledTypography>Cadastro</StyledTypography>
-              <TextField
+              <CustomTextField
                 fullWidth
                 size="small"
                 id="nomecompleto"
@@ -113,7 +114,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <CustomTextField
                 fullWidth
                 size="small"
                 id="email"
@@ -124,7 +125,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
               />
             </Grid>
             <Grid item xs={6}>
-              <TextField
+              <CustomTextField
                 error={!!cpfHelperText}
                 fullWidth
                 size="small"
@@ -138,7 +139,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
               />
             </Grid>
             <Grid item xs={6}>
-              <TextField
+              <CustomTextField
                 fullWidth
                 size="small"
                 id="celular"
@@ -151,7 +152,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
             <Grid item xs={12}>
               <StyledTypography>Endereço</StyledTypography>
               <Box sx={{ display: "flex" }}>
-                <TextField
+                <CustomTextField
                   fullWidth
                   error={!!cepHelperText}
                   helperText={cepHelperText}
@@ -164,7 +165,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
                   onChange={handleInputChange}
                 />
                 <Box sx={{ width: "24px" }}></Box>
-                <TextField
+                <CustomTextField
                   fullWidth
                   size="small"
                   id="state"
@@ -176,7 +177,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
               </Box>
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <CustomTextField
                 fullWidth
                 size="small"
                 id="address"
@@ -187,7 +188,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <CustomTextField
                 fullWidth
                 size="small"
                 id="addressComplement"
@@ -198,7 +199,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <CustomTextField
                 fullWidth
                 size="small"
                 id="city"
