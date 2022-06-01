@@ -49,7 +49,7 @@ export function CheckoutStepper() {
   return (
     <Box sx={{ boxSizing: "border-box" }}>
       <div role="presentation" onClick={handleClick}>
-        <Breadcrumbs aria-label="breadcrumb">
+        <Breadcrumbs aria-label="breadcrumb" sx={{ mx: 1 }}>
           <Button
             variant="text"
             color="primary"
@@ -95,7 +95,7 @@ export function CheckoutStepper() {
           >
             Pagamento
           </Button>
-          <Typography color="text.primary">Breadcrumbs</Typography>
+          {/* <Typography color="text.primary">Breadcrumbs</Typography> */}
         </Breadcrumbs>
       </div>
       <div>
