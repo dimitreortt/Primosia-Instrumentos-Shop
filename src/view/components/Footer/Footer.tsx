@@ -5,7 +5,7 @@ type Props = {};
 
 export const Footer: FunctionComponent<Props> = ({}) => {
   return (
-    <Box sx={{ width: "100%", bgcolor: "primary.light", height: 150 }}>
+    <Box sx={{ width: "100%", bgcolor: "primary.light", height: 150, mt: 2 }}>
       {/* Footer */}
     </Box>
   );

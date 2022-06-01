@@ -78,7 +78,9 @@ export const NavBar = () => {
       <AppBar
         position="static"
         sx={{
-          backgroundColor: "secondary.light",
+          // backgroundColor: "secondary.light",
+          // backgroundColor: "secondary.contrastText",
+          backgroundColor: "#f8f8f8",
         }}
       >
         <Container maxWidth="xl">

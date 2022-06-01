@@ -15,8 +15,10 @@ export const BaseStyledPage: FunctionComponent<Props> = ({ children }) => {
         backgroundImage: `url(${waterMarkBg})`,
         // "url(https://i.pinimg.com/originals/c7/a0/ba/c7a0ba9fe40aca44f660f32fb4ad2545.jpg)",
         backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        height: "100vh",
+        backgroundRepeat: "repeat-y",
+        // backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
+        minHeight: "100vh",
       }}
     >
       <Box

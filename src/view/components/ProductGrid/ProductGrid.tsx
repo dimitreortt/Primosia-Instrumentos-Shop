@@ -60,13 +60,19 @@ const itemData = [
 
 type Props = {
   products: ProductData[];
+  parentCols?: number;
 };
 
-export const ProductGrid: FunctionComponent<Props> = ({ products }) => {
+export const ProductGrid: FunctionComponent<Props> = ({
+  products,
+  parentCols,
+}) => {
   const theme = useTheme();
   const above600 = useMediaQuery("(min-width:600px)");
 
-  const cols = above600 ? 3 : 2;
+  let cols = 3;
+  cols = parentCols ? parentCols : cols;
+  cols = above600 ? cols : 2;
 
   return (
     <ImageList

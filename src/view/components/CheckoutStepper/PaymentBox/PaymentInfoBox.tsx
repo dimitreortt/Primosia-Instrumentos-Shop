@@ -16,11 +16,13 @@ import { CreditCardOptionItem } from "./CreditCardOptionItem";
 import { MercadoPagoForm } from "./MercadoPagoForm";
 import { PanoramaPhotosphereSelectOutlined } from "@mui/icons-material";
 import { StyledTypography } from "../FormsNamesCustomTypography";
+import { useTheme } from "@mui/system";
 
 type Props = {};
 
 export const PaymentInfoBox: FunctionComponent<Props> = ({}) => {
   const [value, setValue] = React.useState("");
+  const theme = useTheme();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const sentValue = (event.target as HTMLInputElement).value;
@@ -68,7 +70,9 @@ export const PaymentInfoBox: FunctionComponent<Props> = ({}) => {
                 control={<Radio />}
                 label={""}
               />
-              <CreditCardOptionItem />
+              <Box>
+                <CreditCardOptionItem />
+              </Box>
             </Typography>
             <Divider />
             <Collapse in={value === "credit"}>

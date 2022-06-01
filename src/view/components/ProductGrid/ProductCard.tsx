@@ -97,6 +97,7 @@ export const ProductCard: FunctionComponent<Props> = ({ product }) => {
         sx={{
           width: "100%",
           height: "40%",
+          // backgroundColor: "#f8f8f8",
           backgroundColor: "#f8f8f8",
           textAlign: "center",
           paddingBottom: "10px",

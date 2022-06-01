@@ -93,7 +93,7 @@ export const CheckoutPage: FunctionComponent<Props> = ({}) => {
             justifyContent: "center",
           }}
         >
-          <Box sx={{ width: 1000, maxWidth: 1000 }}>
+          <Box sx={{ width: 900, maxWidth: 900 }}>
             <Box sx={{ display: "flex" }}>
               <Box sx={{ flexGrow: 1, textAlign: below900 ? "end" : "start" }}>
                 <StyledImage src={LogoRef} alt=" s" />

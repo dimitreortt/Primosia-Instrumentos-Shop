@@ -11,6 +11,7 @@ import { PaymentBox } from "./PaymentBox/PaymentBox";
 import { Breadcrumbs, styled, useMediaQuery } from "@mui/material";
 import { defaultBuyerInfoState } from "./defaultBuyerInfoState";
 import { fetchDeliveryTimeAndPrice } from "./CorreiosIntegration/fetchDeliveryTimeAndPrice";
+import { OrderSummary } from "../OrderSummary/OrderSummary";
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
@@ -98,37 +99,47 @@ export function CheckoutStepper() {
         </Breadcrumbs>
       </div>
       <div>
-        <Box
-          sx={{
-            padding: below500 ? 1 : 0,
-            boxSizing: "border-box",
-            width: below500 ? "100%" : 500,
-
-            // maxWidth: 500,
-          }}
-        >
-          {activeStep === 0 && (
-            <BuyerInformationForm
-              setStep={setStep}
-              buyerInfoState={buyerInfoState}
-              setBuyerInfoState={setBuyerInfoState}
-              fetchCorreiosInfo={fetchCorreiosInfo}
-            />
-          )}
-          {activeStep === 1 && (
-            <ShippingMethodBox
-              setStep={setStep}
-              shippingMethod={shippingMethod}
-              setShippingMethod={setShippingMethod}
-            />
-          )}
-          {activeStep === 2 && (
-            <PaymentBox
-              shippingMethod={shippingMethod}
-              buyerInfoState={buyerInfoState}
-              setStep={setStep}
-            />
-          )}
+        <Box sx={{ display: "flex" }}>
+          <Box
+            sx={{
+              padding: below500 ? 1 : 0,
+              boxSizing: "border-box",
+              width: below500 ? "100%" : 500,
+              minHeight: 400,
+            }}
+          >
+            <Box
+              sx={{
+                padding: below500 ? 1 : 0,
+                boxSizing: "border-box",
+                width: below500 ? "100%" : 500,
+              }}
+            >
+              {activeStep === 0 && (
+                <BuyerInformationForm
+                  setStep={setStep}
+                  buyerInfoState={buyerInfoState}
+                  setBuyerInfoState={setBuyerInfoState}
+                  fetchCorreiosInfo={fetchCorreiosInfo}
+                />
+              )}
+              {activeStep === 1 && (
+                <ShippingMethodBox
+                  setStep={setStep}
+                  shippingMethod={shippingMethod}
+                  setShippingMethod={setShippingMethod}
+                />
+              )}
+              {activeStep === 2 && (
+                <PaymentBox
+                  shippingMethod={shippingMethod}
+                  buyerInfoState={buyerInfoState}
+                  setStep={setStep}
+                />
+              )}
+            </Box>
+          </Box>
+          <OrderSummary />
         </Box>
       </div>
     </Box>

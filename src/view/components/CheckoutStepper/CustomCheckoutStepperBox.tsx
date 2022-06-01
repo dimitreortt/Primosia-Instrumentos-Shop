@@ -11,9 +11,10 @@ export const CustomCheckoutStepperBox = ({ children }: any) => {
         padding: 3,
         paddingBottom: 5,
         boxShadow: 1,
-        borderRadius: 1,
+        // borderRadius: 1,
         borderBottomLeftRadius: 3,
         borderTopLeftRadius: 3,
+        minHeight: 400,
       }}
     >
       {children}

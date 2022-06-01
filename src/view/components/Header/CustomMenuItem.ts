@@ -11,5 +11,5 @@ export const CustomMenuItem = styled(Link, { shouldForwardProp: () => true })<{
   marginBottom: -4,
   padding: "0px 30px",
   textDecoration: "none",
-  color: props.theme.palette.secondary.dark,
+  color: props.theme.palette.primary.dark,
 }));

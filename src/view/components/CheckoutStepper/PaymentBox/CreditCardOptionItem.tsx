@@ -1,10 +1,12 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import React, { FunctionComponent } from "react";
 import { CreditCardsLogos } from "./CreditCardsLogos";
 
 type Props = {};
 
 export const CreditCardOptionItem: FunctionComponent<Props> = ({}) => {
+  const theme = useTheme();
+
   return (
     <Box sx={{ display: "flex", width: "100%" }}>
       <Box
@@ -16,12 +18,25 @@ export const CreditCardOptionItem: FunctionComponent<Props> = ({}) => {
         }}
       >
         {/* <Box>oi</Box> */}
-        <Typography sx={{ fontFamily: "Heuvetica Neue" }}>
+        <Typography
+          sx={{
+            fontFamily: "Heuvetica Neue",
+            [theme.breakpoints.down("sm")]: { mt: 1 },
+          }}
+        >
           Cartão de crédito ou débito
         </Typography>
       </Box>
       <Box sx={{ flexGrow: 1 }}></Box>
-      <CreditCardsLogos />
+      <Box
+        sx={{
+          [theme.breakpoints.down("sm")]: {
+            display: "none",
+          },
+        }}
+      >
+        <CreditCardsLogos />
+      </Box>
     </Box>
   );
 };
