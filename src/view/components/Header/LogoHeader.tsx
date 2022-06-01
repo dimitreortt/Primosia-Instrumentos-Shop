@@ -1,6 +1,7 @@
 import { Box, Grid } from "@mui/material";
 import { styled } from "@mui/system";
 import React, { FunctionComponent } from "react";
+import { Link } from "react-router-dom";
 import { CartButton } from "./CartButton";
 import logoRef from "./logo-no-bg1.png";
 import { SearchBox } from "./SearchBox";
@@ -28,7 +29,9 @@ export const LogoHeader: FunctionComponent<Props> = ({}) => {
             <Box
               sx={{ width: "100%", display: "flex", justifyContent: "center" }}
             >
-              <StyledImg src={logoRef} alt="logo" height={100} />
+              <Link to="/">
+                <StyledImg src={logoRef} alt="logo" height={100} />
+              </Link>
             </Box>
           </Grid>
           <Grid item xs={12} md={6}>

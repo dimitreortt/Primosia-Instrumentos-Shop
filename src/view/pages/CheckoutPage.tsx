@@ -9,6 +9,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import { Footer } from "../components/Footer/Footer";
+import { Link } from "react-router-dom";
 
 type Props = {};
 
@@ -96,7 +97,9 @@ export const CheckoutPage: FunctionComponent<Props> = ({}) => {
           <Box sx={{ width: 900, maxWidth: 900 }}>
             <Box sx={{ display: "flex" }}>
               <Box sx={{ flexGrow: 1, textAlign: below900 ? "end" : "start" }}>
-                <StyledImage src={LogoRef} alt=" s" />
+                <Link to="/">
+                  <StyledImage src={LogoRef} alt=" s" />
+                </Link>
               </Box>
               <Box
                 sx={{
