@@ -53,7 +53,7 @@ export const ProductsFilter: FunctionComponent<Props> = ({
       <Divider />
       {filterItems.map((color) => {
         return (
-          <Box>
+          <Box key={color}>
             <Checkbox
               sx={{
                 padding: 0,

@@ -9,6 +9,14 @@ export type ProductData = {
   attributes: { name: string; options: string[] }[];
   images: string[];
   price: string;
+  description: string;
+  shortDescription: string;
+  dimensions: {
+    length: string;
+    width: string;
+    height: string;
+  };
+  weight: string;
 };
 
 export const dispatchSetProducts = (products: ProductData[]) => {

@@ -87,7 +87,7 @@ export const NavBar = () => {
           <Toolbar disableGutters>
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               {pages.map((p) => {
-                return <CustomMenuItem to={p.path}>{p.name}</CustomMenuItem>;
+                return <CustomMenuItem key={p.path} to={p.path}>{p.name}</CustomMenuItem>;
               })}
             </Box>
             <Box sx={{ display: { xs: "flex", md: "none" }, width: "100%" }}>

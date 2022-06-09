@@ -1,6 +1,8 @@
 import { Product } from "../../domain/entities/Product";
 
 export const makeProducts = (rawProducts: any[]) => {
+  console.log(rawProducts[0]);
+
   const products = rawProducts.map((rawP) => {
     const productObject = {
       name: rawP.name,
@@ -10,6 +12,10 @@ export const makeProducts = (rawProducts: any[]) => {
       attributes: rawP.attributes,
       images: rawP.images.map((i: any) => i.src),
       price: rawP.price,
+      description: rawP.description,
+      shortDescription: rawP.short_description,
+      dimensions: rawP.dimensions,
+      weight: rawP.weight,
     };
     return productObject;
     // return new Product(

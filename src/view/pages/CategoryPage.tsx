@@ -49,6 +49,7 @@ export const CategoryPage: FunctionComponent<Props> = ({}) => {
         sx={{
           display: "flex",
           justifyContent: "center",
+          height: "100%",
         }}
       >
         <Box

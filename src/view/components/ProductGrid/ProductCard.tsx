@@ -7,6 +7,7 @@ import {
   IconButton,
   useTheme,
   useMediaQuery,
+  ButtonBase,
 } from "@mui/material";
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -20,6 +21,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import RemoveCircleOutlinedIcon from "@mui/icons-material/RemoveCircleOutlined";
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 import { formatPrice } from "../../../application/service/formatPrice";
+import { Link } from "react-router-dom";
 
 type Props = {
   product: ProductData;
@@ -86,12 +88,16 @@ export const ProductCard: FunctionComponent<Props> = ({ product }) => {
         sx={{
           height: "60%",
           "&:hover": {
-            cursor: "pointer",
+            // cursor: "pointer",
           },
         }}
-        onClick={() => console.log("oi")}
+        // onClick={() => console.log("oi")}
       >
-        <StyledImg src={product.images[0]} alt="hat" />
+        {/* <ButtonBase> */}
+        <Link to={`/product/${product.id}`}>
+          <StyledImg src={product.images[0]} alt="hat" />
+        </Link>
+        {/* </ButtonBase> */}
       </Box>
       <Box
         sx={{

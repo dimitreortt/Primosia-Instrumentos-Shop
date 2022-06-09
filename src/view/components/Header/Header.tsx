@@ -10,8 +10,16 @@ type Props = {};
 
 const MyDivider = styled(Divider)(({ theme }) => ({
   borderBottomWidth: 3.5,
-  borderColor: "black",
-  marginTop: 8,
+  borderColor: theme.palette.secondary.light,
+  marginTop: 12,
+  marginBottom: 12,
+  // marginRight: 8,
+  [theme.breakpoints.down("md")]: {
+    marginRight: 8,
+    marginLeft: 8,
+    marginTop: 12,
+    // mar: 8,
+  },
 }));
 
 export const Header: FunctionComponent<Props> = ({}) => {

@@ -5,7 +5,7 @@ import waterMarkBg from "../../assets/watermark-bg.jpg";
 import { Footer } from "../components/Footer/Footer";
 
 type Props = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 export const BaseStyledPage: FunctionComponent<Props> = ({ children }) => {
@@ -24,7 +24,8 @@ export const BaseStyledPage: FunctionComponent<Props> = ({ children }) => {
       <Box
         sx={{
           backgroundColor: "rgba(255, 255, 255, 0.7)",
-          height: "100%",
+          // height: "100%",
+          minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
         }}

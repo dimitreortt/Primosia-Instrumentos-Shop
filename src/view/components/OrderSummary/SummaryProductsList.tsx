@@ -11,7 +11,7 @@ export const SummaryProductsList: FunctionComponent<Props> = ({}) => {
   return (
     <div>
       {cartProducts.map((p) => {
-        return <SummaryProductsListItem product={p} />;
+        return <SummaryProductsListItem key={p.product.id} product={p} />;
       })}
     </div>
   );

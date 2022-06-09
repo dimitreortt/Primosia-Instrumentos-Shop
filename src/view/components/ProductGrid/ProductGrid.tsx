@@ -85,8 +85,8 @@ export const ProductGrid: FunctionComponent<Props> = ({
       // rowHeight={164}
     >
       {products.map((product) => (
-        <Box sx={{ padding: 0.5 }}>
-          <ProductCard key={product.id} product={product} />
+        <Box key={product.id} sx={{ padding: 0.5 }}>
+          <ProductCard product={product} />
         </Box>
       ))}
     </ImageList>
