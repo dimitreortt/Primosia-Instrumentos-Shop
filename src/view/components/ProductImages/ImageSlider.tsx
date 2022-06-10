@@ -3,13 +3,18 @@ import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import { ImageSliderItem } from "./ImageSliderItem";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { useWindowDimensions } from "../../../application/hooks/useWindowDimensions";
 
-type Props = { images: string[] };
+type Props = { images: string[]; setSelectedImage: any };
 
-export const ImageSlider: FunctionComponent<Props> = ({ images }) => {
+export const ImageSlider: FunctionComponent<Props> = ({
+  images,
+  setSelectedImage,
+}) => {
+  // const images = ["1", "2", "3", "4", "5", "6", "7", "8"];
   const sliderRef = useRef<HTMLElement>(null);
   const [currentTranslate, setCurrentTranslate] = useState(0);
-
+  const dimensions = useWindowDimensions();
   const sliderItemMarginRight = 1;
   const sliderItemWidth = 90;
   const slideSize = 8 * sliderItemMarginRight + sliderItemWidth;
@@ -45,10 +50,14 @@ export const ImageSlider: FunctionComponent<Props> = ({ images }) => {
   const showSlideRightButton = () => {
     if (!sliderRef.current) return false;
     const width = sliderRef.current.offsetWidth;
-    const fullSliderWidth = slideSize * images.length * 3;
+    const fullSliderWidth = slideSize * images.length;
     if (fullSliderWidth + currentTranslate <= width) return false;
     if (!(fullSliderWidth > width)) return false;
     return true;
+  };
+
+  const handleImageClick = (imageIndex: number) => {
+    setSelectedImage(imageIndex);
   };
 
   return (
@@ -91,15 +100,24 @@ export const ImageSlider: FunctionComponent<Props> = ({ images }) => {
           </IconButton>
         )}
       </Box>
-      <Box sx={{}} ref={sliderRef}>
+      <Box
+        sx={{
+          maxWidth: dimensions.width,
+        }}
+        ref={sliderRef}
+      >
         <Box
           sx={{
             display: "flex",
+            overflow: "hidden",
+            maxWidth: "100%",
           }}
         >
-          {images.concat(["1", "2", "3", "4", "5", "6"]).map((image) => (
+          {images.map((image, index) => (
             // <Item key={i}>{i}</Item>
             <ImageSliderItem
+              index={index}
+              onClick={handleImageClick}
               key={image}
               image={image}
               mr={sliderItemMarginRight}

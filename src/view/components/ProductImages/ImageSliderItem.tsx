@@ -1,7 +1,14 @@
+import { ButtonBase } from "@mui/material";
 import { Box, styled } from "@mui/system";
 import React, { FunctionComponent } from "react";
 
-type Props = { image: string; mr: number; width: number };
+type Props = {
+  image: string;
+  mr: number;
+  width: number;
+  onClick: any;
+  index: number;
+};
 
 const StyledImg = styled("img")({
   width: "100%",
@@ -12,13 +19,17 @@ const StyledImg = styled("img")({
 
 export const ImageSliderItem: FunctionComponent<Props> = ({
   image,
+  index,
   mr,
   width,
+  onClick,
 }) => {
   return (
-    <Box
+    <ButtonBase
+      onClick={() => onClick(index)}
       sx={{
         minWidth: width,
+        maxWidth: width,
         // height: 110,
         mr,
         border: "1px solid",
@@ -27,9 +38,7 @@ export const ImageSliderItem: FunctionComponent<Props> = ({
         backgroundColor: "white",
       }}
     >
-      <StyledImg src={image} alt="product-image" width={"100%"} height="100%" />
-      {/* <Box sx={{ p: 1, boxSizing: "border-box" }}>
-      </Box> */}
-    </Box>
+      <StyledImg src={image} alt="product-image" />
+    </ButtonBase>
   );
 };
