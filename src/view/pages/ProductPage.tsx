@@ -11,7 +11,7 @@ import { Box } from "@mui/system";
 import { useParams } from "react-router-dom";
 import { ProductDetails } from "../components/ProductDetails/ProductDetails";
 import { ProductDescription } from "../components/ProductDetails/ProductDescription";
-import { ProductSpecifications } from "../components/ProductDetails/ProductSpecifications";
+import { ProductImages } from "../components/ProductImages/ProductImages";
 
 export const ProductPage = () => {
   // const [products, setProducts] = useState<any>([]);
@@ -36,7 +36,9 @@ export const ProductPage = () => {
         <Grid container>
           <Grid item xs={12} md={6}>
             <Box sx={{ maxWidth: "100%", m: 1, boxSizing: "border-box" }}>
-              <img src={product.images[0]} alt="product image" width={"100%"} />
+              <ProductImages product={product} />
+
+              {/* <SmoothSlider /> */}
             </Box>
           </Grid>
           <Grid item xs={12} md={6}>
