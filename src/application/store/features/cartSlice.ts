@@ -34,7 +34,7 @@ export const cartSlice = createSlice({
       const found = state.products.find((p) => {
         return p.product.id === product.id;
       });
-      if (found) {
+      if (found && found.quantity > 0) {
         found.quantity -= 1;
       }
     },

@@ -11,23 +11,14 @@ import {
 } from "@mui/material";
 import React, { FunctionComponent, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
 import DirectionsIcon from "@mui/icons-material/Directions";
 import { PreviewOutlined } from "@mui/icons-material";
 import { ShippingInfo } from "./ShippingInfo";
+import { CepTextField } from "./CepTextField";
 type Props = {};
 
 export const CheckShippingByCep: FunctionComponent<Props> = ({}) => {
-  const [cep, setCep] = useState("");
   const [showShipping, setShowShipping] = useState(false);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCep(event.target.value);
-  };
-
-  const handleSearch = () => {
-    setShowShipping((prev) => !prev);
-  };
 
   return (
     <Grid container>
@@ -39,21 +30,7 @@ export const CheckShippingByCep: FunctionComponent<Props> = ({}) => {
         </Typography>
       </Grid>
       <Grid item xs={7} md={8}>
-        <TextField
-          id="search field"
-          label="CEP"
-          value={cep}
-          onChange={handleChange}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton aria-label="delete" onClick={handleSearch}>
-                  <SearchIcon />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
+        <CepTextField setShowShipping={setShowShipping} />
       </Grid>
       <Grid item xs={12}>
         {showShipping && <ShippingInfo />}
