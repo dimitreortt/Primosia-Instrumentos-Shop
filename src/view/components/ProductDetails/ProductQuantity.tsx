@@ -6,10 +6,29 @@ import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { Box } from "@mui/system";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../application/store/configureStore";
+import {
+  dispatchAddProduct,
+  dispatchRemoveProduct,
+} from "../../../application/store/actions/cartActions";
 
 type Props = { product: ProductData };
 
 export const ProductQuantity: FunctionComponent<Props> = ({ product }) => {
+  const cartProducts = useSelector((state: RootState) => state.cart.products);
+  const cartProduct = cartProducts.find((p) => p.product.id === product.id);
+
+  const handleBuyClick = () => {
+    dispatchAddProduct(product);
+    // setQuantityInCart(quantityInCart + 1);
+  };
+
+  const handleRemoveClick = () => {
+    // setQuantityInCart(quantityInCart - 1);
+    dispatchRemoveProduct(product);
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <Typography
@@ -19,7 +38,10 @@ export const ProductQuantity: FunctionComponent<Props> = ({ product }) => {
         Quantidade:
       </Typography>
       <Box sx={{ display: "flex" }}>
-        <IconButton sx={{ color: "primary", py: 0 }}>
+        <IconButton
+          sx={{ color: "primary", py: 0 }}
+          onClick={handleRemoveClick}
+        >
           <RemoveIcon sx={{ color: "primary.dark", py: 0 }} color="primary" />
         </IconButton>
         <Typography
@@ -34,9 +56,9 @@ export const ProductQuantity: FunctionComponent<Props> = ({ product }) => {
           component="span"
           color="primary.dark"
         >
-          {0}
+          {cartProduct ? cartProduct.quantity : 0}
         </Typography>
-        <IconButton sx={{ color: "primary" }}>
+        <IconButton sx={{ color: "primary" }} onClick={handleBuyClick}>
           <AddIcon sx={{ color: "primary.dark" }} />
         </IconButton>
       </Box>

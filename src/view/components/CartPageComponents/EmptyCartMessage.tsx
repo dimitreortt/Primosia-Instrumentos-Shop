@@ -19,6 +19,7 @@ export const GoShoppingButton: FunctionComponent<{}> = () => {
             fontWeight: 600,
             wordSpacing: 2,
             borderRadius: 0,
+            textTransform: "none",
             //   backgroundColor: "primary.dark",
           }}
         >

@@ -49,6 +49,7 @@ export const CartPage: FunctionComponent<Props> = ({}) => {
                     my: 1,
                     color: "secondary.dark",
                     boxSizing: "border-box",
+                    fontWeight: 600,
                   }}
                 >
                   continuar comprando
