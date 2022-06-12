@@ -1,18 +1,5 @@
-import {
-  Box,
-  Divider,
-  Grid,
-  IconButton,
-  InputAdornment,
-  InputBase,
-  Paper,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import React, { FunctionComponent, useState } from "react";
-import MenuIcon from "@mui/icons-material/Menu";
-import DirectionsIcon from "@mui/icons-material/Directions";
-import { PreviewOutlined } from "@mui/icons-material";
 import { ShippingInfo } from "./ShippingInfo";
 import { CepTextField } from "./CepTextField";
 type Props = {};
