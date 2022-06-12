@@ -9,6 +9,8 @@ export type FontProps = {
   size?: number;
   color?: string;
   fontWeight?: number;
+  textTransform?: string;
+  textDecoration?: string;
 };
 
 export const CustomTypography: FunctionComponent<FontProps> = ({

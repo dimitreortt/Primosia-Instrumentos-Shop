@@ -19,6 +19,7 @@ import {
   dispatchAddProduct,
   dispatchRemoveProduct,
 } from "../../../application/store/actions/cartActions";
+import { Link } from "react-router-dom";
 
 type Props = {
   product: CartProductData;
@@ -74,20 +75,27 @@ export const ProductListItem: FunctionComponent<Props> = ({ product }) => {
         <Grid item xs={12} sm={6} sx={{ display: "flex", mb: 2 }}>
           {/* <Box sx={{display:''}}></Box> */}
           <Box sx={{ width: 70, height: 70 }}>
-            <StyledImage
-              src={product.product.images[0]}
-              alt="s"
-              sx={{
-                border: "1px solid",
-                borderColor: "secondary.main",
-              }}
-            />
+            <Link to={`/product/${product.product.id}`}>
+              <StyledImage
+                src={product.product.images[0]}
+                alt="s"
+                sx={{
+                  border: "1px solid",
+                  borderColor: "secondary.main",
+                }}
+              />
+            </Link>
           </Box>
           <Box>
             <MiddleAlignedBox sx={{ ml: 1 }}>
-              <Font2 color="primary.dark" size={20}>
-                {product.product.name}
-              </Font2>
+              <Link
+                to={`/product/${product.product.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <Font2 color="primary.dark" size={20}>
+                  {product.product.name}
+                </Font2>
+              </Link>
             </MiddleAlignedBox>
           </Box>
         </Grid>

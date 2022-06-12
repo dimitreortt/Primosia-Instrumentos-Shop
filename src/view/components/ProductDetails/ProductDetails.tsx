@@ -1,5 +1,6 @@
 import { Box, Button } from "@mui/material";
 import React, { FunctionComponent } from "react";
+import { Link } from "react-router-dom";
 import { ProductData } from "../../../application/store/actions/productsActions";
 import { CheckShippingByCep } from "./CheckShippingByCep";
 import { ProductAttributes } from "./ProductAttributes";
@@ -21,8 +22,9 @@ export const ProductDetails: FunctionComponent<Props> = ({ product }) => {
       {/* <ProductAttributes /> */}
       <Box sx={{ display: "flex" }}>
         <ProductQuantity product={product} />
-
         <Button
+          component={Link}
+          to="/cart"
           sx={{ borderRadius: 20, fontWeight: 600, fontSize: 17 }}
           fullWidth
           variant="contained"
