@@ -17,10 +17,6 @@ export const ProductImages: FunctionComponent<Props> = ({ product }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const imgRef = useRef<HTMLImageElement>(null);
 
-  useEffect(() => {
-    console.log(imgRef.current?.offsetWidth);
-  }, [imgRef]);
-
   return (
     <Box>
       <StyledImg

@@ -7,6 +7,7 @@ import { CategoryPage } from "../view/pages/CategoryPage";
 import { CheckoutPage } from "../view/pages/CheckoutPage";
 import waterMarkBg from "../assets/watermark-bg.jpg";
 import { ProductPage } from "../view/pages/ProductPage";
+import { CartPage } from "../view/pages/CartPage";
 
 type Props = {};
 
@@ -31,6 +32,7 @@ export const AppRouter: FunctionComponent<Props> = ({}) => {
       <Routes>
         <Route path="/category/:category" element={<CategoryPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/product/:productId" element={<ProductPage />} />
         <Route path="*" element={<App />}></Route>
       </Routes>

@@ -8,6 +8,7 @@ export type FontProps = {
   font?: string;
   size?: number;
   color?: string;
+  fontWeight?: number;
 };
 
 export const CustomTypography: FunctionComponent<FontProps> = ({
@@ -23,7 +24,8 @@ export const CustomTypography: FunctionComponent<FontProps> = ({
   return (
     <Typography
       component="span"
-      textAlign={center ? "center" : "start"}
+      // textAlign={center ? "center" : "start"}
+      textAlign={"center"}
       sx={sx}
     >
       {children}

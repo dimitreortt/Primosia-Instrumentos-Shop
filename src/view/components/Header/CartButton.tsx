@@ -46,10 +46,10 @@ export const CartButton: FunctionComponent<Props> = ({ size }) => {
     setPriceSum(priceSum);
   }, [cartProducts]);
 
-  const onClick = () => {
-    //@ts-ignore
-    window.location = "/checkout";
-  };
+  // const onClick = () => {
+  //   //@ts-ignore
+  //   window.location = "/checkout";
+  // };
 
   return (
     <Box
@@ -63,12 +63,12 @@ export const CartButton: FunctionComponent<Props> = ({ size }) => {
       }}
     >
       {/*@ts-ignore */}
-      <StyledButton component={Link} to="/checkout" variant="text">
+      <StyledButton component={Link} to="/cart" variant="text">
         <CustomCartIcon />
         Ver Carrinho
       </StyledButton>
       {numberOfItems > 0 && (
-        <Link to={`/checkout`}>
+        <Link to={`/cart`}>
           <Typography
             component="span"
             textAlign={"center"}

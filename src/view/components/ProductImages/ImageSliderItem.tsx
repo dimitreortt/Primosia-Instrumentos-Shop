@@ -30,6 +30,7 @@ export const ImageSliderItem: FunctionComponent<Props> = ({
       sx={{
         minWidth: width,
         maxWidth: width,
+        minHeight: 80,
         // height: 110,
         mr,
         border: "1px solid",

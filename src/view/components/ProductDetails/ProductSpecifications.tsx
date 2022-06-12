@@ -11,10 +11,10 @@ const Item: FunctionComponent<{
 }> = ({ children, title }) => {
   return (
     <Box>
-      <Box sx={{ border: "1px solid", borderColor: "primary.light", p: 1 }}>
+      <Box sx={{ border: "1px solid", borderColor: "rgba(0,0,0,0.2)", p: 1 }}>
         <Font1 size={12.8}>{title}</Font1>
       </Box>
-      <Box sx={{ border: "1px solid", borderColor: "primary.light", p: 1 }}>
+      <Box sx={{ border: "1px solid", borderColor: "rgba(0,0,0,0.2)", p: 1 }}>
         {children}
       </Box>
     </Box>
@@ -25,7 +25,7 @@ export const ProductSpecifications: FunctionComponent<Props> = ({
   product,
 }) => {
   return (
-    <Box sx={{ border: "1px solid black", borderColor: "primary.main" }}>
+    <Box sx={{ border: "1px solid", borderColor: "rgba(0,0,0,0.2)" }}>
       <Grid container>
         <Grid item xs={4}>
           <Item title="Comprimento(cm)">{product.dimensions.length}</Item>
