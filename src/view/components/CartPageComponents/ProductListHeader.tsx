@@ -8,7 +8,7 @@ type Props = {};
 const HeaderItem = ({ children }: any) => {
   return (
     <MiddleAlignedBox>
-      <Font1 size={21} color="primary.dark" fontWeight={600}>
+      <Font1 center size={21} color="primary.dark" fontWeight={600}>
         {children}
       </Font1>
     </MiddleAlignedBox>

@@ -24,8 +24,8 @@ export const CustomTypography: FunctionComponent<FontProps> = ({
   return (
     <Typography
       component="span"
-      // textAlign={center ? "center" : "start"}
-      textAlign={"center"}
+      textAlign={center ? "center" : "start"}
+      // textAlign={"center"}
       sx={sx}
     >
       {children}
