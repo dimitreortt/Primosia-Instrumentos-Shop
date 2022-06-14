@@ -4,6 +4,7 @@ import { DeliveryTaxes } from "../../service/dispatchDeliveryTaxes";
 export interface DeliveryOptionState {
   cep: string;
   taxes: DeliveryTaxes;
+  productId?: string;
 }
 
 export interface DeliveryState {

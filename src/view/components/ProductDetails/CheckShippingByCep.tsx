@@ -10,12 +10,14 @@ type Props = { product: ProductData };
 
 export const CheckShippingByCep: FunctionComponent<Props> = ({ product }) => {
   const [showShipping, setShowShipping] = useState(false);
+  const taxes = useSelector((state: RootState) => {
+    const p = state.delivery.product;
+    if (p?.productId === product.id) return p.taxes;
+  });
 
   let cartProduct = useSelector((state: RootState) =>
     state.cart.products.find((p) => p.product.id === product.id)
   );
-
-  // let cartProduct = { product, quantity: 1 };
 
   if (!cartProduct || cartProduct.quantity === 0)
     cartProduct = { product, quantity: 1 };
@@ -34,12 +36,13 @@ export const CheckShippingByCep: FunctionComponent<Props> = ({ product }) => {
           <CepTextField
             products={[cartProduct]}
             setShowShipping={setShowShipping}
-            dispatchProduct={true}
+            shouldDispatchProduct={true}
           />
         )}
       </Grid>
       <Grid item xs={12}>
-        {showShipping && <ShippingInfo />}
+        {/* {showShipping && <ShippingInfo />} */}
+        {taxes && <ShippingInfo deliveryTaxes={taxes} />}
       </Grid>
     </Grid>
   );

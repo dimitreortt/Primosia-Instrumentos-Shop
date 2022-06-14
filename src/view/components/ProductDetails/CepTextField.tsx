@@ -14,13 +14,13 @@ import {
 type Props = {
   setShowShipping: React.Dispatch<React.SetStateAction<boolean>>;
   products: CartProductData[];
-  dispatchProduct?: boolean;
+  shouldDispatchProduct?: boolean;
 };
 
 export const CepTextField: FunctionComponent<Props> = ({
   setShowShipping,
   products,
-  dispatchProduct,
+  shouldDispatchProduct,
 }) => {
   const [cep, setCep] = useState("");
 
@@ -33,7 +33,12 @@ export const CepTextField: FunctionComponent<Props> = ({
     const cleaned = cleanCep(cep);
     if (cleaned.length !== 8) throw new Error("CEP Inválido");
     const deliveryTaxes = await fetchDeliveryTaxes(cleaned, products);
-    dispatchDeliveryTaxes(cleaned, deliveryTaxes, dispatchProduct);
+    dispatchDeliveryTaxes(
+      cleaned,
+      deliveryTaxes,
+      shouldDispatchProduct,
+      products[0].product
+    );
     // dispatchFetchDeliveryTax(cep, products);
   };
 
