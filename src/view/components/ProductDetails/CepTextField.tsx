@@ -5,6 +5,7 @@ import { CartProductData } from "../../../domain/entities/CartProduct";
 import {
   DeliveryTaxes,
   dispatchDeliveryTaxes,
+  dispatchLoadingDeliveryTaxes,
 } from "../../../application/service/dispatchDeliveryTaxes";
 import {
   cleanCep,
@@ -32,6 +33,7 @@ export const CepTextField: FunctionComponent<Props> = ({
     // setShowShipping((prev) => !prev);
     const cleaned = cleanCep(cep);
     if (cleaned.length !== 8) throw new Error("CEP Inválido");
+    dispatchLoadingDeliveryTaxes(true);
     const deliveryTaxes = await fetchDeliveryTaxes(cleaned, products);
     dispatchDeliveryTaxes(
       cleaned,
@@ -39,6 +41,7 @@ export const CepTextField: FunctionComponent<Props> = ({
       shouldDispatchProduct,
       products[0].product
     );
+    dispatchLoadingDeliveryTaxes(false);
     // dispatchFetchDeliveryTax(cep, products);
   };
 

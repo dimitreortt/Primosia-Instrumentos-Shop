@@ -1,6 +1,10 @@
 import { ProductData } from "../store/actions/productsActions";
 import { store } from "../store/configureStore";
-import { setCartTaxes, setProductTaxes } from "../store/features/deliverySlice";
+import {
+  setCartTaxes,
+  setLoadingDeliveryTaxes,
+  setProductTaxes,
+} from "../store/features/deliverySlice";
 
 export type DeliveryOption = {
   valor: string;
@@ -10,6 +14,10 @@ export type DeliveryOption = {
 export type DeliveryTaxes = {
   pac: DeliveryOption;
   sedex: DeliveryOption;
+};
+
+export const dispatchLoadingDeliveryTaxes = (isLoading: boolean) => {
+  store.dispatch(setLoadingDeliveryTaxes(isLoading));
 };
 
 export const dispatchDeliveryTaxes = (
