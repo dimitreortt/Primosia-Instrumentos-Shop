@@ -2,10 +2,23 @@ import { Grid, Typography } from "@mui/material";
 import React, { FunctionComponent, useState } from "react";
 import { ShippingInfo } from "./ShippingInfo";
 import { CepTextField } from "./CepTextField";
-type Props = {};
+import { ProductData } from "../../../application/store/actions/productsActions";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../application/store/configureStore";
 
-export const CheckShippingByCep: FunctionComponent<Props> = ({}) => {
+type Props = { product: ProductData };
+
+export const CheckShippingByCep: FunctionComponent<Props> = ({ product }) => {
   const [showShipping, setShowShipping] = useState(false);
+
+  let cartProduct = useSelector((state: RootState) =>
+    state.cart.products.find((p) => p.product.id === product.id)
+  );
+
+  // let cartProduct = { product, quantity: 1 };
+
+  if (!cartProduct || cartProduct.quantity === 0)
+    cartProduct = { product, quantity: 1 };
 
   return (
     <Grid container>
@@ -17,7 +30,13 @@ export const CheckShippingByCep: FunctionComponent<Props> = ({}) => {
         </Typography>
       </Grid>
       <Grid item xs={7} md={8}>
-        <CepTextField setShowShipping={setShowShipping} />
+        {cartProduct && (
+          <CepTextField
+            products={[cartProduct]}
+            setShowShipping={setShowShipping}
+            dispatchProduct={true}
+          />
+        )}
       </Grid>
       <Grid item xs={12}>
         {showShipping && <ShippingInfo />}

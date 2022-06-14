@@ -7,8 +7,10 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { FunctionComponent, useState } from "react";
+import { useSelector } from "react-redux";
 import { formatPrice } from "../../../application/service/formatPrice";
 import { getCurrentCartTotalPrice } from "../../../application/service/getCurrentCartTotalPrice";
+import { RootState } from "../../../application/store/configureStore";
 import { Font1 } from "../CustomFonts/Font1";
 import { CepTextField } from "../ProductDetails/CepTextField";
 import { CheckShippingByCep } from "../ProductDetails/CheckShippingByCep";
@@ -17,6 +19,8 @@ type Props = {};
 
 export const SideInfo: FunctionComponent<Props> = ({}) => {
   const [showShipping, setShowShipping] = useState(false);
+  const cartProducts = useSelector((state: RootState) => state.cart.products);
+
   const theme = useTheme();
 
   return (
@@ -40,7 +44,10 @@ export const SideInfo: FunctionComponent<Props> = ({}) => {
         Simule o frete e o prazo de entrega
       </Font1>
       <Box sx={{ mt: 1 }}>
-        <CepTextField setShowShipping={setShowShipping} />
+        <CepTextField
+          products={cartProducts}
+          setShowShipping={setShowShipping}
+        />
       </Box>
       <Button
         onClick={() =>

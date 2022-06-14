@@ -33,7 +33,7 @@ export const ProductDetails: FunctionComponent<Props> = ({ product }) => {
           comprar
         </Button>
       </Box>
-      <CheckShippingByCep />
+      <CheckShippingByCep product={product} />
       <ProductShortDescription product={product} />
       <ProductSpecifications product={product} />
     </Box>

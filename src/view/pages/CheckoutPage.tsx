@@ -14,9 +14,9 @@ type Props = {};
 export const CheckoutPage: FunctionComponent<Props> = ({}) => {
   const below900 = useMediaQuery("(max-width:900px)");
 
-  const onClick = () => {
-    fetchDeliveryTaxes();
-  };
+  // const onClick = () => {
+  //   fetchDeliveryTaxes();
+  // };
 
   return (
     <Box

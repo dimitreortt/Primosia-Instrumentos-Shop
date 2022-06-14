@@ -1,18 +1,40 @@
 import { IconButton, InputAdornment, TextField } from "@mui/material";
 import React, { FunctionComponent, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import { CartProductData } from "../../../domain/entities/CartProduct";
+import {
+  DeliveryTaxes,
+  dispatchDeliveryTaxes,
+} from "../../../application/service/dispatchDeliveryTaxes";
+import {
+  cleanCep,
+  fetchDeliveryTaxes,
+} from "../../../application/service/fetchDeliveryTaxes";
 
-type Props = { setShowShipping: React.Dispatch<React.SetStateAction<boolean>> };
+type Props = {
+  setShowShipping: React.Dispatch<React.SetStateAction<boolean>>;
+  products: CartProductData[];
+  dispatchProduct?: boolean;
+};
 
-export const CepTextField: FunctionComponent<Props> = ({ setShowShipping }) => {
+export const CepTextField: FunctionComponent<Props> = ({
+  setShowShipping,
+  products,
+  dispatchProduct,
+}) => {
   const [cep, setCep] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCep(event.target.value);
   };
 
-  const handleSearch = () => {
-    setShowShipping((prev) => !prev);
+  const handleSearch = async () => {
+    // setShowShipping((prev) => !prev);
+    const cleaned = cleanCep(cep);
+    if (cleaned.length !== 8) throw new Error("CEP Inválido");
+    const deliveryTaxes = await fetchDeliveryTaxes(cleaned, products);
+    dispatchDeliveryTaxes(cleaned, deliveryTaxes, dispatchProduct);
+    // dispatchFetchDeliveryTax(cep, products);
   };
 
   return (

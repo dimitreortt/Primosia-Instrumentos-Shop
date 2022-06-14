@@ -118,7 +118,7 @@ export const ImageSlider: FunctionComponent<Props> = ({
             <ImageSliderItem
               index={index}
               onClick={handleImageClick}
-              key={image}
+              key={index}
               image={image}
               mr={sliderItemMarginRight}
               width={sliderItemWidth}
