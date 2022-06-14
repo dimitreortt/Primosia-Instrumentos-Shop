@@ -1,38 +1,82 @@
-export const fetchDeliveryTaxes = () => {
-  const buyerInfo = {
-    cep: "05318030",
+import { CartProductData } from "../../domain/entities/CartProduct";
+import { DeliveryTaxes } from "./dispatchDeliveryTaxes";
+
+type Dim = { length: number; height: number; width: number; weight: number };
+
+const getConjugateDimensions = (products: CartProductData[]) => {
+  const { length, height, width } = products[0].product.dimensions;
+  const weight = products[0].product.weight;
+
+  const conjugateDimensions: Dim = {
+    length: Number(length) * products[0].quantity,
+    height: Number(height) * products[0].quantity,
+    width: Number(width) * products[0].quantity,
+    weight: Number(weight) * products[0].quantity,
   };
 
-  const orderInfo = {
-    peso: 1,
-    comprimento: 10,
-    largura: 10,
-    altura: 10,
+  for (const p of products.slice(1, products.length)) {
+    conjugateDimensions.width +=
+      Number(p.product.dimensions.width) * p.quantity;
+    conjugateDimensions.weight += Number(p.product.weight) * p.quantity;
+  }
+
+  if (
+    conjugateDimensions.length +
+      conjugateDimensions.width +
+      conjugateDimensions.height <
+    40
+  ) {
+    conjugateDimensions.length = 20;
+    conjugateDimensions.width = 10;
+    conjugateDimensions.height = 10;
+  }
+
+  return conjugateDimensions;
+};
+
+export const cleanCep = (cep: string) => cep.replace(/\D/g, "");
+
+export const fetchDeliveryTaxes = async (
+  cep: string,
+  products: CartProductData[]
+): Promise<DeliveryTaxes> => {
+  // const cep = cleanCep(rawCep);
+  if (cep.length !== 8) throw new Error("CEP Inválido");
+  const dimensions = getConjugateDimensions(products);
+  const body = {
+    buyerInfo: {
+      cep,
+    },
+    orderInfo: {
+      peso: dimensions.weight,
+      comprimento: dimensions.length,
+      altura: dimensions.height,
+      largura: dimensions.width,
+    },
   };
 
-  const body = { buyerInfo, orderInfo };
+  console.log(body);
 
-  fetch(
+  const { pacInfo, sedexInfo } = await fetch(
     "https://us-central1-primosia-intrumentos-musicais.cloudfunctions.net/delivery_taxes",
     {
-      method: "post",
+      method: "POST",
       headers: {
-        // Authorization: this.authorization,
-        Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
     }
-  )
-    .then((response) => {
-      //do something awesome that makes the world a better place
-      return response.json();
-    })
-    .then((response) => {
-      console.log(response);
-      return response;
-    })
-    .catch((error: any) => {
-      console.log(error);
-    });
+  ).then((response) => response.json());
+
+  return {
+    pac: {
+      valor: pacInfo[0].Valor,
+      prazo: pacInfo[0].PrazoEntrega,
+    },
+    sedex: {
+      valor: sedexInfo[0].Valor,
+      prazo: sedexInfo[0].PrazoEntrega,
+    },
+  };
+  // .then((response) => console.log(response));
 };
