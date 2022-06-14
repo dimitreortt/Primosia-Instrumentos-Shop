@@ -1,4 +1,10 @@
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Divider,
+  Grid,
+  Typography,
+} from "@mui/material";
 import React, { FunctionComponent } from "react";
 import { useSelector } from "react-redux";
 import {
@@ -58,7 +64,9 @@ export const ShippingInfo: FunctionComponent<Props> = ({ deliveryTaxes }) => {
     <Box sx={{ mt: 1 }}>
       <Divider />
       {isLoadingDeliveryTaxes ? (
-        <div>spinner</div>
+        <Box sx={{ display: "flex", justifyContent: "center", my: 2 }}>
+          <CircularProgress sx={{ color: "primary.dark" }} />
+        </Box>
       ) : (
         <>
           <Grid container>

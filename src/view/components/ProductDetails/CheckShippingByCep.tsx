@@ -1,15 +1,19 @@
-import { Grid, Typography } from "@mui/material";
+import { CircularProgress, Grid, Typography } from "@mui/material";
 import React, { FunctionComponent, useState } from "react";
 import { ShippingInfo } from "./ShippingInfo";
 import { CepTextField } from "./CepTextField";
 import { ProductData } from "../../../application/store/actions/productsActions";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../application/store/configureStore";
+import { Box } from "@mui/system";
 
 type Props = { product: ProductData };
 
 export const CheckShippingByCep: FunctionComponent<Props> = ({ product }) => {
   const [showShipping, setShowShipping] = useState(false);
+  const isLoadingDeliveryTaxes = useSelector(
+    (state: RootState) => state.delivery.loading
+  );
   const taxes = useSelector((state: RootState) => {
     const p = state.delivery.product;
     if (p?.productId === product.id) return p.taxes;
@@ -42,7 +46,13 @@ export const CheckShippingByCep: FunctionComponent<Props> = ({ product }) => {
       </Grid>
       <Grid item xs={12}>
         {/* {showShipping && <ShippingInfo />} */}
-        {taxes && <ShippingInfo deliveryTaxes={taxes} />}
+        {isLoadingDeliveryTaxes ? (
+          <Box sx={{ display: "flex", justifyContent: "center", my: 2 }}>
+            <CircularProgress sx={{ color: "primary.dark" }} />
+          </Box>
+        ) : (
+          <>{taxes && <ShippingInfo deliveryTaxes={taxes} />}</>
+        )}
       </Grid>
     </Grid>
   );
