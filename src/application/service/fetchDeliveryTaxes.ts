@@ -9,8 +9,8 @@ const getConjugateDimensions = (products: CartProductData[]) => {
 
   const conjugateDimensions: Dim = {
     length: Number(length) * products[0].quantity,
-    height: Number(height) * products[0].quantity,
-    width: Number(width) * products[0].quantity,
+    height: Number(height),
+    width: Number(width),
     weight: Number(weight) * products[0].quantity,
   };
 
