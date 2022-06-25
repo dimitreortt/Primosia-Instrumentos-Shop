@@ -46,13 +46,13 @@ export const CheckShippingByCep: FunctionComponent<Props> = ({ product }) => {
       </Grid>
       <Grid item xs={12}>
         {/* {showShipping && <ShippingInfo />} */}
-        {isLoadingDeliveryTaxes ? (
+        {/* {isLoadingDeliveryTaxes ? (
           <Box sx={{ display: "flex", justifyContent: "center", my: 2 }}>
             <CircularProgress sx={{ color: "primary.dark" }} />
           </Box>
         ) : (
-          <>{taxes && <ShippingInfo deliveryTaxes={taxes} />}</>
-        )}
+          )} */}
+        <ShippingInfo deliveryTaxes={taxes} />
       </Grid>
     </Grid>
   );

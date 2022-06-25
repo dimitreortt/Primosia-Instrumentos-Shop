@@ -15,7 +15,7 @@ import { ProductData } from "../../../application/store/actions/productsActions"
 import { RootState } from "../../../application/store/configureStore";
 import { Font1 } from "../CustomFonts/Font1";
 
-type Props = { deliveryTaxes: DeliveryTaxes };
+type Props = { deliveryTaxes?: DeliveryTaxes };
 
 const ShippingInfoItem: FunctionComponent<{
   optionName: string;
@@ -55,6 +55,8 @@ export const ShippingInfo: FunctionComponent<Props> = ({ deliveryTaxes }) => {
     (state: RootState) => state.delivery.loading
   );
 
+  console.log(isLoadingDeliveryTaxes);
+
   for (const option in deliveryTaxes) {
     //@ts-ignore
     options.push({ option: deliveryTaxes[option], name: option });
@@ -68,34 +70,36 @@ export const ShippingInfo: FunctionComponent<Props> = ({ deliveryTaxes }) => {
           <CircularProgress sx={{ color: "primary.dark" }} />
         </Box>
       ) : (
-        <>
-          <Grid container>
-            <Grid item xs={4}>
-              <Font1 color="primary.dark">
-                <b>Frete</b>
-              </Font1>
-              {/* <Typography sx={{ fontFamily: "Heuvetica Neue" }}>R$ 6,50</Typography> */}
-            </Grid>
-            <Grid item xs={4}>
-              <Typography
-                sx={{ fontFamily: "Heuvetica Neue", color: "primary.dark" }}
-              >
-                <b>Prazo</b>
-              </Typography>
-              {/* <Typography sx={{ fontFamily: "Heuvetica Neue" }}>
+        deliveryTaxes && (
+          <>
+            <Grid container>
+              <Grid item xs={4}>
+                <Font1 color="primary.dark">
+                  <b>Frete</b>
+                </Font1>
+                {/* <Typography sx={{ fontFamily: "Heuvetica Neue" }}>R$ 6,50</Typography> */}
+              </Grid>
+              <Grid item xs={4}>
+                <Typography
+                  sx={{ fontFamily: "Heuvetica Neue", color: "primary.dark" }}
+                >
+                  <b>Prazo</b>
+                </Typography>
+                {/* <Typography sx={{ fontFamily: "Heuvetica Neue" }}>
             4 dias úteis
           </Typography> */}
+              </Grid>
+              <Grid item xs={4}></Grid>
             </Grid>
-            <Grid item xs={4}></Grid>
-          </Grid>
-          {options.map((o: any) => (
-            <ShippingInfoItem
-              key={o.name}
-              optionName={o.name}
-              option={o.option}
-            />
-          ))}
-        </>
+            {options.map((o: any) => (
+              <ShippingInfoItem
+                key={o.name}
+                optionName={o.name}
+                option={o.option}
+              />
+            ))}
+          </>
+        )
       )}
       <Divider />
     </Box>
