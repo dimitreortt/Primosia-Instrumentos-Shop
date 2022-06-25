@@ -20,6 +20,12 @@ const getConjugateDimensions = (products: CartProductData[]) => {
     conjugateDimensions.weight += Number(p.product.weight) * p.quantity;
   }
 
+  for (const field in conjugateDimensions) {
+    if (field === "weight") continue;
+    //@ts-ignore
+    if (conjugateDimensions[field] < 10) conjugateDimensions[field] = 10;
+  }
+
   if (
     conjugateDimensions.length +
       conjugateDimensions.width +
@@ -43,6 +49,7 @@ export const fetchDeliveryTaxes = async (
   // const cep = cleanCep(rawCep);
   if (cep.length !== 8) throw new Error("CEP Inválido");
   const dimensions = getConjugateDimensions(products);
+  console.log(dimensions);
   const body = {
     buyerInfo: {
       cep,
@@ -66,7 +73,13 @@ export const fetchDeliveryTaxes = async (
       },
       body: JSON.stringify(body),
     }
-  ).then((response) => response.json());
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => console.log(error));
 
   return {
     pac: {
