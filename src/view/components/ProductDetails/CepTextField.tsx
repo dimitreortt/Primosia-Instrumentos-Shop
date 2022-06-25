@@ -11,6 +11,7 @@ import {
   cleanCep,
   fetchDeliveryTaxes,
 } from "../../../application/service/fetchDeliveryTaxes";
+import { AlertSnackbar } from "../AlertSnackbar/AlertSnackbar";
 
 type Props = {
   setShowShipping: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,6 +24,7 @@ export const CepTextField: FunctionComponent<Props> = ({
   products,
   shouldDispatchProduct,
 }) => {
+  const [error, setError] = useState<string>();
   const [cep, setCep] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,36 +32,49 @@ export const CepTextField: FunctionComponent<Props> = ({
   };
 
   const handleSearch = async () => {
-    // setShowShipping((prev) => !prev);
-    const cleaned = cleanCep(cep);
-    if (cleaned.length !== 8) throw new Error("CEP Inválido");
-    dispatchLoadingDeliveryTaxes(true);
-    const deliveryTaxes = await fetchDeliveryTaxes(cleaned, products);
-    dispatchDeliveryTaxes(
-      cleaned,
-      deliveryTaxes,
-      shouldDispatchProduct,
-      products[0].product
-    );
-    dispatchLoadingDeliveryTaxes(false);
-    // dispatchFetchDeliveryTax(cep, products);
+    try {
+      // setShowShipping((prev) => !prev);
+      const cleaned = cleanCep(cep);
+      if (cleaned.length !== 8) throw new Error("CEP Inválido");
+      dispatchLoadingDeliveryTaxes(true);
+      const deliveryTaxes = await fetchDeliveryTaxes(cleaned, products);
+      dispatchDeliveryTaxes(
+        cleaned,
+        deliveryTaxes,
+        shouldDispatchProduct,
+        products[0].product
+      );
+      dispatchLoadingDeliveryTaxes(false);
+      // dispatchFetchDeliveryTax(cep, products);
+    } catch (error: any) {
+      setError(error.message);
+    }
+  };
+
+  const onAlertClose = () => {
+    setError(undefined);
   };
 
   return (
-    <TextField
-      id="search field"
-      label="CEP"
-      value={cep}
-      onChange={handleChange}
-      InputProps={{
-        endAdornment: (
-          <InputAdornment position="end">
-            <IconButton aria-label="delete" onClick={handleSearch}>
-              <SearchIcon />
-            </IconButton>
-          </InputAdornment>
-        ),
-      }}
-    />
+    <React.Fragment>
+      <TextField
+        id="search field"
+        label="CEP"
+        value={cep}
+        onChange={handleChange}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton aria-label="delete" onClick={handleSearch}>
+                <SearchIcon />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
+      <AlertSnackbar open={!!error} onClose={onAlertClose} severity="error">
+        {error}
+      </AlertSnackbar>
+    </React.Fragment>
   );
 };
