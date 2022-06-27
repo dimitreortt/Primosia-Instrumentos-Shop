@@ -12,6 +12,7 @@ import { Breadcrumbs, styled, useMediaQuery } from "@mui/material";
 import { defaultBuyerInfoState } from "./defaultBuyerInfoState";
 import { fetchDeliveryTimeAndPrice } from "./CorreiosIntegration/fetchDeliveryTimeAndPrice";
 import { OrderSummary } from "../OrderSummary/OrderSummary";
+import { BreadCrumb } from "./BreadCrumb";
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
@@ -48,56 +49,7 @@ export function CheckoutStepper() {
 
   return (
     <Box sx={{ boxSizing: "border-box" }}>
-      <div role="presentation" onClick={handleClick}>
-        <Breadcrumbs aria-label="breadcrumb" sx={{ mx: 1 }}>
-          <Button
-            variant="text"
-            color="primary"
-            sx={{
-              textTransform: "none",
-              fontFamily: "Heuvetica Neue",
-              padding: 0,
-              "&:hover": {
-                bgcolor: "transparent",
-              },
-            }}
-            onClick={() => setStep("info")}
-          >
-            Informações
-          </Button>
-          <Button
-            variant="text"
-            color="primary"
-            sx={{
-              fontFamily: "Heuvetica Neue",
-              padding: 0,
-              textTransform: "none",
-              "&:hover": {
-                bgcolor: "transparent",
-              },
-            }}
-            onClick={() => setStep("shipping")}
-          >
-            Entrega
-          </Button>
-          <Button
-            variant="text"
-            color="primary"
-            sx={{
-              fontFamily: "Heuvetica Neue",
-              textTransform: "none",
-              padding: 0,
-              "&:hover": {
-                bgcolor: "transparent",
-              },
-            }}
-            onClick={() => setStep("payment")}
-          >
-            Pagamento
-          </Button>
-          {/* <Typography color="text.primary">Breadcrumbs</Typography> */}
-        </Breadcrumbs>
-      </div>
+      <BreadCrumb setStep={setStep} />
       <div>
         <Box sx={{ display: "flex" }}>
           <Box
