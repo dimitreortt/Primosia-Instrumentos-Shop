@@ -1,18 +1,9 @@
-import {
-  Button,
-  FormControl,
-  FormLabel,
-  Grid,
-  styled,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { FormEventHandler, FunctionComponent, useState } from "react";
 import { Link } from "react-router-dom";
 import { validateCep } from "../../../application/service/validateCep";
 import { validateCpf } from "../../../application/service/validateCpf";
-import { fetchDeliveryTimeAndPrice } from "./CorreiosIntegration/fetchDeliveryTimeAndPrice";
 import { CustomCheckoutStepperBox } from "./CustomCheckoutStepperBox";
 import { CustomTextField } from "./CustomTextField";
 import { defaultBuyerInfoState } from "./defaultBuyerInfoState";
@@ -50,6 +41,7 @@ export const BuyerInformationForm: FunctionComponent<Props> = ({
 
   const infoOk = () => {
     for (const key in defaultBuyerInfoState) {
+      if (key === "addressComplement") continue;
       //@ts-ignore
       if (!buyerInfoState[key]) return false;
     }

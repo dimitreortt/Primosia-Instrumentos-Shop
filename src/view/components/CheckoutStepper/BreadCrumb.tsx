@@ -1,14 +1,15 @@
 import { Breadcrumbs, Button } from "@mui/material";
 import React, { FunctionComponent } from "react";
 
-type Props = { setStep: (step: string) => void };
+type Props = { step: number; setStep: (step: string) => void };
 
 function handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
   event.preventDefault();
   console.info("You clicked a breadcrumb.");
 }
 
-export const BreadCrumb: FunctionComponent<Props> = ({ setStep }) => {
+export const BreadCrumb: FunctionComponent<Props> = ({ step, setStep }) => {
+  console.log(step);
   //   const [activeStep, setActiveStep] = React.useState(0);
 
   //   const map: any = {
@@ -50,6 +51,7 @@ export const BreadCrumb: FunctionComponent<Props> = ({ setStep }) => {
               bgcolor: "transparent",
             },
           }}
+          disabled={step < 1}
           onClick={() => setStep("shipping")}
         >
           Entrega
@@ -66,6 +68,7 @@ export const BreadCrumb: FunctionComponent<Props> = ({ setStep }) => {
             },
           }}
           onClick={() => setStep("payment")}
+          disabled={step < 2}
         >
           Pagamento
         </Button>

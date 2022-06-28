@@ -82,7 +82,12 @@ export const ShippingMethodBox: FunctionComponent<Props> = ({
         >
           Prosseguir para pagamento
         </Button>
-        <Button variant="text" color="primary" sx={{ marginLeft: 1 }}>
+        <Button
+          variant="text"
+          color="primary"
+          sx={{ marginLeft: 1 }}
+          onClick={() => setStep("info")}
+        >
           Retornar
         </Button>
       </Box>
